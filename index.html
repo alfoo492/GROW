@@ -40,7 +40,9 @@ h2.serif-white em { color: var(--accent); font-style: italic; }
 header { position: fixed; top: 0; width: 100%; z-index: 999; background: rgba(0,58,99,0.97); backdrop-filter: blur(10px); height: 66px; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
 nav { max-width: 1200px; margin: 0 auto; padding: 0 5%; height: 100%; display: flex; align-items: center; justify-content: space-between; }
 .nav-brand { display: flex; align-items: center; gap: 12px; }
-.nav-orb { width: 36px; height: 36px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 700; font-size: 16px; color: var(--white); }
+/* White fill: the mark is navy line art, so it disappears on the navy header. */
+.nav-orb { width: 36px; height: 36px; background: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+.nav-orb img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .nav-wordmark { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; color: var(--white); letter-spacing: 0.4px; }
 .nav-wordmark span { color: var(--accent); margin-left: 4px; }
 .nav-links { list-style: none; display: flex; align-items: center; gap: 26px; }
@@ -244,7 +246,8 @@ nav { max-width: 1200px; margin: 0 auto; padding: 0 5%; height: 100%; display: f
 footer { background: var(--navy); padding: 72px 5% 36px; }
 .footer-inner { max-width: 1200px; margin: 0 auto; }
 .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 52px; padding-bottom: 52px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-.footer-brand-orb { width: 46px; height: 46px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 700; font-size: 19px; color: var(--white); margin-bottom: 16px; }
+.footer-brand-orb { width: 46px; height: 46px; background: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; margin-bottom: 16px; }
+.footer-brand-orb img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .footer-brand h2 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; color: var(--white); margin-bottom: 10px; }
 .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.38); line-height: 1.8; max-width: 270px; }
 .footer-col h4 { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 18px; }
@@ -300,7 +303,7 @@ footer { background: var(--navy); padding: 72px 5% 36px; }
 <header>
   <nav>
     <div class="nav-brand">
-      <div class="nav-orb">G</div>
+      <div class="nav-orb"><img src="logo.png" alt="GROW Global Health — Grace Reaches On Wheels" width="36" height="36"></div>
       <div class="nav-wordmark">GROW<span>·</span></div>
     </div>
     <ul class="nav-links">
@@ -801,7 +804,7 @@ footer { background: var(--navy); padding: 72px 5% 36px; }
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="footer-brand-orb">G</div>
+        <div class="footer-brand-orb"><img src="logo.png" alt="GROW Global Health — Grace Reaches On Wheels" width="46" height="46"></div>
         <h2>GROW</h2>
         <p>Grace Reaches On Wheels — raising NCD awareness and bringing health education and care closer to communities across Tanzania and beyond. Launched May 2026.</p>
       </div>
