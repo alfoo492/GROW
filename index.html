@@ -124,10 +124,6 @@ nav { max-width: 1200px; margin: 0 auto; padding: 0 5%; height: 100%; display: f
 /* ── WEBINAR SECTION ── */
 .webinar-bg { background: var(--blue-dark); }
 .webinar-inner { max-width: 1200px; margin: 0 auto; padding: 80px 5%; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
-.wb-countdown { display: flex; gap: 14px; margin-top: 30px; }
-.countdown-box { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 18px 20px; text-align: center; min-width: 76px; }
-.countdown-num { font-family: 'Fraunces', serif; font-size: 36px; font-weight: 300; color: var(--white); line-height: 1; }
-.countdown-lbl { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 5px; }
 .webinar-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 22px; padding: 38px; }
 .webinar-card .date-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); border-radius: 100px; padding: 7px 18px; font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 22px; }
 .webinar-card h3 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 400; color: var(--white); margin-bottom: 14px; line-height: 1.3; }
@@ -291,8 +287,7 @@ footer { background: var(--navy); padding: 72px 5% 36px; }
   .g-card.large { grid-column: span 1; }
   .impact-grid { grid-template-columns: 1fr 1fr; }
   .team-grid { grid-template-columns: 1fr 1fr; }
-  .wb-countdown { flex-wrap: wrap; }
-  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
   .register-form { flex-direction: column; }
 }
 </style>
@@ -308,7 +303,7 @@ footer { background: var(--navy); padding: 72px 5% 36px; }
     </div>
     <ul class="nav-links">
       <li><a href="#about">About Us</a></li>
-      <li><a href="#webinar">Webinar</a></li>
+      <li><a href="#event">Events</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#team">Our Team</a></li>
       <li><a href="#roadmap">Roadmap</a></li>
@@ -320,8 +315,8 @@ footer { background: var(--navy); padding: 72px 5% 36px; }
 <!-- ════ WEBINAR BANNER ════ -->
 <div class="webinar-banner">
   <div class="wb-badge">Upcoming Event</div>
-  <div class="wb-text"><strong>Free Online Webinar — 25th July 2026:</strong> Join GROW's founding community. Limited spots available.</div>
-  <a href="#webinar" class="wb-cta">Register Free →</a>
+  <div class="wb-text"><strong>Friday, 21st August 2026:</strong> NCDs Education Outreach at Mnazi Mmoja Secondary School.</div>
+  <a href="#event" class="wb-cta">See Details →</a>
 </div>
 
 <!-- ════ HERO ════ -->
@@ -335,7 +330,7 @@ footer { background: var(--navy); padding: 72px 5% 36px; }
       <h1>Empowering Communities.<br><em>Advancing</em><br>Health.</h1>
       <p>GROW – Grace Reaches On Wheels is a health outreach initiative dedicated to raising awareness, educating communities, and supporting patients facing non-communicable diseases (NCDs) around the world.</p>
       <div class="hero-actions">
-        <a href="#webinar" class="btn-primary">Join Our Webinar</a>
+        <a href="#event" class="btn-primary">Our Next Outreach</a>
         <a href="#about" class="btn-outline">
           Learn More
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -432,33 +427,26 @@ footer { background: var(--navy); padding: 72px 5% 36px; }
 </div>
 
 <!-- ════ WEBINAR ════ -->
-<div class="webinar-bg" id="webinar">
+<div class="webinar-bg" id="event">
   <div class="webinar-inner">
     <div>
       <span class="label label-light">Upcoming Event</span>
-      <h2 class="serif serif-white">Be part of something<br><em>meaningful</em></h2>
-      <p style="font-size:16px;color:rgba(255,255,255,0.55);line-height:1.82;margin-top:18px;max-width:480px;">GROW is building a community of health advocates, educators, volunteers, and supporters. Our first webinar is the place to start — come learn our vision, share yours, and help shape what comes next.</p>
-      <div class="wb-countdown" id="countdown">
-        <div class="countdown-box"><div class="countdown-num" id="cd-days">--</div><div class="countdown-lbl">Days</div></div>
-        <div class="countdown-box"><div class="countdown-num" id="cd-hours">--</div><div class="countdown-lbl">Hours</div></div>
-        <div class="countdown-box"><div class="countdown-num" id="cd-mins">--</div><div class="countdown-lbl">Minutes</div></div>
-        <div class="countdown-box"><div class="countdown-num" id="cd-secs">--</div><div class="countdown-lbl">Seconds</div></div>
-      </div>
+      <h2 class="serif serif-white">Taking NCD education<br><em>into schools</em></h2>
+      <p style="font-size:16px;color:rgba(255,255,255,0.55);line-height:1.82;margin-top:18px;max-width:480px;">Our Educators Team is heading to Mnazi Mmoja Secondary School to talk with students about non-communicable diseases — what they are, how they take hold, and the everyday habits that keep them at bay. Reaching people early is how prevention becomes second nature.</p>
     </div>
     <div class="webinar-card">
-      <div class="date-chip">📅 &nbsp;Saturday, 25th July 2026 · Online</div>
-      <h3>GROW Founding Community Webinar</h3>
-      <p>Our first online gathering — open to anyone who believes everyone deserves good health information and care.</p>
+      <div class="date-chip">📅 &nbsp;Friday, 21st August 2026 · Mnazi Mmoja Secondary School</div>
+      <h3>NCDs Education Outreach</h3>
+      <p>An in-person session led by the GROW Educators Team, bringing NCD awareness directly to students.</p>
       <ul class="webinar-perks">
-        <li>Meet the GROW team and hear our mission firsthand</li>
-        <li>Learn how you can help — as a member, volunteer, or partner</li>
-        <li>Get a first look at our five-year roadmap</li>
-        <li>Join an open discussion on NCDs in our communities</li>
-        <li>Be among the first to join GROW's member network</li>
+        <li>What NCDs are — cancer, diabetes, heart and respiratory disease</li>
+        <li>How everyday habits shape long-term risk</li>
+        <li>Recognising early warning signs and when to seek care</li>
+        <li>Open discussion and Q&amp;A with the GROW Educators Team</li>
       </ul>
       <div class="register-form">
-        <input type="email" placeholder="Enter your email to register" id="webinar-email">
-        <button id="register-btn">Register Free</button>
+        <input type="email" placeholder="Your email to join the outreach team" id="webinar-email">
+        <button id="register-btn">Sign Up</button>
       </div>
     </div>
   </div>
@@ -692,7 +680,7 @@ footer { background: var(--navy); padding: 72px 5% 36px; }
       <div class="team-card team-join">
         <h3>Could this be you?</h3>
         <p>We are actively growing our team of health professionals, technologists, educators, and community advocates. Join us at the founding stage and help shape GROW's future.</p>
-        <a href="#webinar" class="team-join-btn">Join at Our Webinar →</a>
+        <a href="#event" class="team-join-btn">Join Our Team →</a>
       </div>
 
     </div>
@@ -812,7 +800,7 @@ footer { background: var(--navy); padding: 72px 5% 36px; }
         <h4>Navigate</h4>
         <ul>
           <li><a href="#about">About Us</a></li>
-          <li><a href="#webinar">July Webinar</a></li>
+          <li><a href="#event">Upcoming Event</a></li>
           <li><a href="#education">Education Hub</a></li>
           <li><a href="#team">Our Team</a></li>
           <li><a href="#roadmap">Roadmap</a></li>
@@ -833,7 +821,7 @@ footer { background: var(--navy); padding: 72px 5% 36px; }
         <ul>
           <li><a href="#">Instagram</a></li>
           <li><a href="#">LinkedIn</a></li>
-          <li><a href="#webinar">Join Our Webinar</a></li>
+          <li><a href="#event">Join an Outreach</a></li>
           <li><a href="#donate">Partner With Us</a></li>
           <li><a href="#team">Volunteer</a></li>
         </ul>
@@ -854,35 +842,15 @@ footer { background: var(--navy); padding: 72px 5% 36px; }
 </footer>
 
 <script>
-// ── COUNTDOWN to 25 July 2026 ──
-function updateCountdown() {
-  const target = new Date('2026-07-25T09:00:00+03:00').getTime();
-  const now = Date.now();
-  const diff = target - now;
-  if (diff <= 0) {
-    document.getElementById('cd-days').textContent = '0';
-    document.getElementById('cd-hours').textContent = '0';
-    document.getElementById('cd-mins').textContent = '0';
-    document.getElementById('cd-secs').textContent = '0';
-    return;
-  }
-  document.getElementById('cd-days').textContent  = Math.floor(diff / 86400000);
-  document.getElementById('cd-hours').textContent = Math.floor((diff % 86400000) / 3600000);
-  document.getElementById('cd-mins').textContent  = Math.floor((diff % 3600000) / 60000);
-  document.getElementById('cd-secs').textContent  = Math.floor((diff % 60000) / 1000);
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
 // ── WEBINAR REGISTER ──
 document.getElementById('register-btn').addEventListener('click', function() {
   const input = document.getElementById('webinar-email');
   if (input.value && input.value.includes('@')) {
-    this.textContent = 'Registered! ✓';
+    this.textContent = 'Signed up! ✓';
     this.style.background = '#1a6e40';
     input.value = '';
     input.placeholder = 'You\'re on the list!';
-    setTimeout(() => { this.textContent = 'Register Free'; this.style.background = ''; input.placeholder = 'Enter your email to register'; }, 4000);
+    setTimeout(() => { this.textContent = 'Sign Up'; this.style.background = ''; input.placeholder = 'Your email to join the outreach team'; }, 4000);
   } else {
     input.style.borderColor = 'rgba(192,57,43,0.7)';
     input.focus();
