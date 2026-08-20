@@ -249,9 +249,13 @@ header {
   transition: grid-template-rows 0.45s var(--ease), opacity 0.35s 0.05s var(--ease), visibility 0s;
 }
 .collapse[data-open="true"] > .collapse-inner { transform: translateY(0); }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-block) var(--sp-group); align-items: start; margin-top: var(--sp-block); }
-.about-text p { font-size: 16px; color: var(--text-mid); line-height: 1.85; margin-bottom: 18px; }
-.about-quote { border-left: 3px solid var(--blue-mid); padding: 18px 0 18px 26px; margin: 26px 0; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-block) var(--sp-group); align-items: start; margin-top: var(--sp-tight); }
+/* Justified to both container edges, no first-line indent. hyphens keeps the
+   word spacing even once the columns narrow. */
+.about-text p, .about-quote p, .val-desc { text-align: justify; text-indent: 0; hyphens: auto; }
+.about-text p { font-size: 16px; color: var(--text-mid); line-height: 1.85; margin-bottom: 16px; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-quote { border-left: 3px solid var(--blue-mid); padding: 14px 0 14px 22px; margin: 0 0 20px; }
 .about-quote p { font-family: 'Fraunces', serif; font-size: 18.5px; font-weight: 300; font-style: italic; color: var(--blue-dark); line-height: 1.55; }
 
 /* why-NCDs stats (moved off the homepage) */
@@ -269,7 +273,7 @@ header {
 .ai-use-text strong { display: block; color: var(--text-dark); font-weight: 600; margin-bottom: 2px; }
 
 .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-tight); }
-.val-card { background: var(--bg); border: 1px solid #e4e9f0; border-top: 3px solid var(--blue-mid); border-radius: 14px; padding: 22px 20px; transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease); }
+.val-card { background: var(--bg); border: 1px solid #e4e9f0; border-top: 3px solid var(--blue-mid); border-radius: 14px; padding: 18px; transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease); }
 .val-card:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(0,58,99,0.08); }
 .val-card.accent-top { border-top-color: var(--accent); }
 .val-card.span2 { grid-column: span 2; background: var(--blue-dark); border-top-color: var(--accent); }
@@ -644,7 +648,7 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
         </div>
 
         <div class="reveal">
-          <span class="label" style="margin-top:var(--sp-group);">Why This Work Matters</span>
+          <span class="label" style="margin-top:var(--sp-block);">Why This Work Matters</span>
           <div class="why-strip">
             <div class="why-card">
               <div class="why-num">41M</div>
