@@ -231,22 +231,31 @@ header {
    content's own height, so there's no max-height to guess. visibility is
    delayed to the end of the collapse, which takes the hidden content out of
    the tab order and the accessibility tree once it's out of sight. */
-.tab-toggle { display: inline-flex; align-items: center; gap: 9px; background: none; border: 0; padding: 0; margin-bottom: var(--sp-tight); font: inherit; cursor: pointer; }
+.tab-toggle {
+  display: inline-flex; align-items: center; gap: 9px; background: none; border: 0;
+  padding: 5px 11px; margin: 0 0 var(--sp-tight) -11px; border-radius: 10px;
+  font: inherit; cursor: pointer; transition: background 0.2s var(--ease);
+}
 .tab-toggle .label { margin-bottom: 0; transition: color 0.2s var(--ease); }
-.tab-chev { width: 14px; height: 14px; fill: none; stroke: var(--blue-mid); stroke-width: 2.5; transition: transform 0.3s var(--ease), stroke 0.2s var(--ease); }
+.tab-chev { width: 14px; height: 14px; fill: none; stroke: var(--blue-mid); stroke-width: 2.5; transition: transform 0.28s var(--ease), stroke 0.2s var(--ease); }
 .tab-toggle[aria-expanded="true"] .tab-chev { transform: rotate(180deg); }
-.tab-toggle:hover .label { color: var(--accent-dark); }
-.tab-toggle:hover .tab-chev { stroke: var(--accent-dark); }
-.title-toggle { cursor: pointer; }
+.title-toggle { cursor: pointer; transition: color 0.2s var(--ease); }
+/* Hover cues only where there's a real pointer, so they don't stick after a tap. */
+@media (hover: hover) {
+  .tab-toggle:hover { background: var(--blue-pale); }
+  .tab-toggle:hover .label { color: var(--accent-dark); }
+  .tab-toggle:hover .tab-chev { stroke: var(--accent-dark); }
+  .title-toggle:hover { color: var(--blue-mid); }
+}
 
 .collapse {
   display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden;
-  transition: grid-template-rows 0.45s var(--ease), opacity 0.3s var(--ease), visibility 0s linear 0.45s;
+  transition: grid-template-rows 0.32s var(--ease), opacity 0.22s var(--ease), visibility 0s linear 0.32s;
 }
-.collapse-inner { overflow: hidden; transform: translateY(-10px); transition: transform 0.45s var(--ease); }
+.collapse-inner { overflow: hidden; transform: translateY(-8px); transition: transform 0.32s var(--ease); }
 .collapse[data-open="true"] {
   grid-template-rows: 1fr; opacity: 1; visibility: visible;
-  transition: grid-template-rows 0.45s var(--ease), opacity 0.35s 0.05s var(--ease), visibility 0s;
+  transition: grid-template-rows 0.32s var(--ease), opacity 0.26s 0.04s var(--ease), visibility 0s;
 }
 .collapse[data-open="true"] > .collapse-inner { transform: translateY(0); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-block) var(--sp-group); align-items: start; margin-top: var(--sp-tight); }
