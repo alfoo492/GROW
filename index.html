@@ -30,6 +30,7 @@
   --white:      #ffffff;
 
   --header-h: 76px;
+  --announce-h: 50px;
   --wrap: 1200px;
   --radius: 18px;
   --ease: cubic-bezier(.22,.61,.36,1);
@@ -140,16 +141,18 @@ header {
 .nav-drawer .drawer-cta { margin-top: 12px; background: var(--accent); color: var(--white); text-align: center; font-weight: 600; border-left: none; border-radius: 100px; }
 .nav-drawer .drawer-cta:hover { background: var(--accent-dark); }
 
-/* ── ANNOUNCEMENT BANNER ── */
+/* ── ANNOUNCEMENT BANNER ──
+   One tight strip. The split gap (row column) matters most on narrow screens,
+   where the badge, text and button wrap onto separate lines. */
 .announce {
-  background: var(--accent); padding: 13px 5%; margin-top: var(--header-h);
-  display: flex; align-items: center; justify-content: center; gap: 18px;
+  background: var(--accent); padding: 9px 5%; margin-top: var(--header-h);
+  display: flex; align-items: center; justify-content: center; gap: 7px 16px;
   flex-wrap: wrap; text-align: center;
 }
-.announce-badge { background: rgba(255,255,255,0.2); border-radius: 100px; padding: 4px 14px; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--white); white-space: nowrap; }
-.announce-text { font-size: 14px; color: rgba(255,255,255,0.95); }
+.announce-badge { background: rgba(255,255,255,0.2); border-radius: 100px; padding: 3px 12px; font-size: 10.5px; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; color: var(--white); white-space: nowrap; }
+.announce-text { font-size: 13.5px; line-height: 1.45; color: rgba(255,255,255,0.95); }
 .announce-text strong { color: var(--white); font-weight: 600; }
-.announce-cta { background: var(--white); color: var(--accent-dark); font-size: 13px; font-weight: 600; padding: 7px 20px; border-radius: 100px; white-space: nowrap; transition: opacity 0.2s; }
+.announce-cta { background: var(--white); color: var(--accent-dark); font-size: 12.5px; font-weight: 600; padding: 6px 18px; border-radius: 100px; white-space: nowrap; transition: opacity 0.2s; }
 .announce-cta:hover { opacity: 0.88; }
 
 /* ── BUTTONS ── */
@@ -169,7 +172,7 @@ header {
 
 /* ── HOME ── */
 .home {
-  min-height: calc(100vh - var(--header-h) - 47px);
+  min-height: calc(100vh - var(--header-h) - var(--announce-h));
   background: linear-gradient(to right, rgba(0,58,99,0.95) 52%, rgba(0,58,99,0.7)),
               url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
   /* Top-aligned: with the GROW lockup gone, centering left a big gap under the
@@ -409,6 +412,8 @@ footer { background: #002a48; padding: 72px 5% 34px; }
 }
 @media (max-width: 640px) {
   .wrap, .event-inner, .support-inner { padding-top: 66px; padding-bottom: 66px; }
+  .announce { padding: 8px 5%; gap: 6px 12px; }
+  .announce-text { font-size: 12.5px; }
   .home { padding: 32px 5% 56px; min-height: 0; }
   .nav-orb { width: 38px; height: 38px; }
   .nav-wordmark { font-size: 20px; }
