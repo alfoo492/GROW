@@ -225,6 +225,29 @@ header {
 
 /* ── ABOUT ── */
 .about-bg { background: var(--white); }
+
+/* The section body is collapsed on load — only the tab and headline show.
+   0fr -> 1fr animates to the content's own height, so no max-height guess.
+   visibility is delayed to the end of the collapse so the hidden content
+   leaves the tab order and the accessibility tree once it's out of sight. */
+.about-toggle { display: inline-flex; align-items: center; gap: 9px; background: none; border: 0; padding: 0; margin-bottom: var(--sp-tight); font: inherit; cursor: pointer; }
+.about-toggle .label { margin-bottom: 0; transition: color 0.2s var(--ease); }
+.about-chev { width: 14px; height: 14px; fill: none; stroke: var(--blue-mid); stroke-width: 2.5; transition: transform 0.3s var(--ease), stroke 0.2s var(--ease); }
+.about-toggle[aria-expanded="true"] .about-chev { transform: rotate(180deg); }
+.about-toggle:hover .label { color: var(--accent-dark); }
+.about-toggle:hover .about-chev { stroke: var(--accent-dark); }
+.about-title-toggle { cursor: pointer; }
+
+.about-panel {
+  display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden;
+  transition: grid-template-rows 0.45s var(--ease), opacity 0.3s var(--ease), visibility 0s linear 0.45s;
+}
+.about-panel-inner { overflow: hidden; transform: translateY(-10px); transition: transform 0.45s var(--ease); }
+.about-panel[data-open="true"] {
+  grid-template-rows: 1fr; opacity: 1; visibility: visible;
+  transition: grid-template-rows 0.45s var(--ease), opacity 0.35s 0.05s var(--ease), visibility 0s;
+}
+.about-panel[data-open="true"] .about-panel-inner { transform: translateY(0); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-block) var(--sp-group); align-items: start; margin-top: var(--sp-block); }
 .about-text p { font-size: 16px; color: var(--text-mid); line-height: 1.85; margin-bottom: 18px; }
 .about-quote { border-left: 3px solid var(--blue-mid); padding: 18px 0 18px 26px; margin: 26px 0; }
@@ -541,88 +564,93 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
 <section class="about-bg" id="about" aria-labelledby="about-title">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="label">Who We Are</span>
-      <h2 class="serif" id="about-title">Building healthier<br>communities <em>together</em></h2>
+      <button type="button" class="about-toggle" id="about-toggle" aria-expanded="false" aria-controls="about-panel">
+        <span class="label">Who We Are</span>
+        <svg class="about-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <h2 class="serif about-title-toggle" id="about-title">Building healthier<br>communities <em>together</em></h2>
     </div>
 
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <blockquote class="about-quote">
-          <p>"To educate communities, support patients, and help people take charge of their health — one conversation at a time."</p>
-        </blockquote>
-        <p>GROW – Grace Reaches On Wheels was founded in Dar es Salaam, Tanzania, to help underserved communities understand and manage non-communicable diseases (NCDs). We bring together health education, technology, and hands-on community work.</p>
-        <p>Since launching in May 2026, GROW has combined culturally grounded education with AI-powered tools to reach communities across Tanzania and beyond. We started with digital outreach, and we're growing into mobile health services and stronger local partnerships.</p>
-        <p>We run as a <strong>hybrid initiative</strong> — a non-profit arm focused on awareness and patient support, alongside a sustainable services arm that funds our long-term work through mobile health and pharmacy services.</p>
+    <div class="about-panel" id="about-panel" data-open="false">
+      <div class="about-panel-inner">
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <blockquote class="about-quote">
+              <p>"To educate communities, support patients, and help people take charge of their health — one conversation at a time."</p>
+            </blockquote>
+            <p>GROW – Grace Reaches On Wheels is a Tanzania-founded health initiative focused on helping underserved communities prevent and manage NCDs through culturally relevant education, technology, and community outreach. Since launching in May 2026, GROW has combined digital and AI-powered solutions with plans to expand into mobile health services and local partnerships through a sustainable hybrid model.</p>
 
-        <div style="margin-top:26px;">
-          <span class="label" style="margin-bottom:12px;">How AI Powers GROW</span>
-          <div class="ai-uses">
-            <div class="ai-use-item">
-              <div class="ai-use-icon" aria-hidden="true">🎬</div>
-              <div class="ai-use-text"><strong>Content Creation</strong>AI helps us make animated health videos in Swahili and English.</div>
-            </div>
-            <div class="ai-use-item">
-              <div class="ai-use-icon" aria-hidden="true">📊</div>
-              <div class="ai-use-text"><strong>Health Data Analysis</strong>AI helps us spot NCD risk patterns and know where to focus.</div>
-            </div>
-            <div class="ai-use-item">
-              <div class="ai-use-icon" aria-hidden="true">🤖</div>
-              <div class="ai-use-text"><strong>Community Engagement</strong>AI helps us stay in touch with our members and volunteers.</div>
-            </div>
-            <div class="ai-use-item">
-              <div class="ai-use-icon" aria-hidden="true">🏥</div>
-              <div class="ai-use-text"><strong>Clinical Decision Support</strong>Down the road, AI will help our mobile clinics with screenings.</div>
+            <div style="margin-top:26px;">
+              <span class="label" style="margin-bottom:12px;">How AI Powers GROW</span>
+              <div class="ai-uses">
+                <div class="ai-use-item">
+                  <div class="ai-use-icon" aria-hidden="true">🎬</div>
+                  <div class="ai-use-text"><strong>Content Creation</strong>AI helps us make animated health videos in Swahili and English.</div>
+                </div>
+                <div class="ai-use-item">
+                  <div class="ai-use-icon" aria-hidden="true">📊</div>
+                  <div class="ai-use-text"><strong>Health Data Analysis</strong>AI helps us spot NCD risk patterns and know where to focus.</div>
+                </div>
+                <div class="ai-use-item">
+                  <div class="ai-use-icon" aria-hidden="true">🤖</div>
+                  <div class="ai-use-text"><strong>Community Engagement</strong>AI helps us stay in touch with our members and volunteers.</div>
+                </div>
+                <div class="ai-use-item">
+                  <div class="ai-use-icon" aria-hidden="true">🏥</div>
+                  <div class="ai-use-text"><strong>Clinical Decision Support</strong>Down the road, AI will help our mobile clinics with screenings.</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="reveal">
-        <span class="label" style="margin-bottom:16px;">Our Core Values</span>
-        <div class="values-grid">
-          <div class="val-card">
-            <div class="val-icon" aria-hidden="true">🤲</div>
-            <div class="val-name">Compassion</div>
-            <div class="val-desc">Everyone we serve is treated with dignity, empathy, and respect.</div>
-          </div>
-          <div class="val-card accent-top">
-            <div class="val-icon" aria-hidden="true">🔬</div>
-            <div class="val-name">Education</div>
-            <div class="val-desc">We share clear, accurate, and culturally relevant health knowledge.</div>
-          </div>
-          <div class="val-card accent-top">
-            <div class="val-icon" aria-hidden="true">💡</div>
-            <div class="val-name">Innovation</div>
-            <div class="val-desc">We use technology to reach further and make a bigger impact.</div>
-          </div>
-          <div class="val-card">
-            <div class="val-icon" aria-hidden="true">🔒</div>
-            <div class="val-name">Integrity</div>
-            <div class="val-desc">We stay transparent and accountable in everything we do.</div>
-          </div>
-          <div class="val-card span2">
-            <div class="val-icon" aria-hidden="true">🌍</div>
-            <div class="val-name">Community</div>
-            <div class="val-desc">Real change happens together. GROW exists for — and answers to — the communities it serves.</div>
+          <div class="reveal">
+            <span class="label" style="margin-bottom:16px;">Our Core Values</span>
+            <div class="values-grid">
+              <div class="val-card">
+                <div class="val-icon" aria-hidden="true">🤲</div>
+                <div class="val-name">Compassion</div>
+                <div class="val-desc">Everyone we serve is treated with dignity, empathy, and respect.</div>
+              </div>
+              <div class="val-card accent-top">
+                <div class="val-icon" aria-hidden="true">🔬</div>
+                <div class="val-name">Education</div>
+                <div class="val-desc">We share clear, accurate, and culturally relevant health knowledge.</div>
+              </div>
+              <div class="val-card accent-top">
+                <div class="val-icon" aria-hidden="true">💡</div>
+                <div class="val-name">Innovation</div>
+                <div class="val-desc">We use technology to reach further and make a bigger impact.</div>
+              </div>
+              <div class="val-card">
+                <div class="val-icon" aria-hidden="true">🔒</div>
+                <div class="val-name">Integrity</div>
+                <div class="val-desc">We stay transparent and accountable in everything we do.</div>
+              </div>
+              <div class="val-card span2">
+                <div class="val-icon" aria-hidden="true">🌍</div>
+                <div class="val-name">Community</div>
+                <div class="val-desc">Real change happens together. GROW exists for — and answers to — the communities it serves.</div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="reveal">
-      <span class="label" style="margin-top:var(--sp-group);">Why This Work Matters</span>
-      <div class="why-strip">
-        <div class="why-card">
-          <div class="why-num">41M</div>
-          <div class="why-lbl">Deaths annually from NCDs — 74% of all global deaths (WHO, 2023)</div>
-        </div>
-        <div class="why-card">
-          <div class="why-num">77%</div>
-          <div class="why-lbl">Of NCD deaths occur in low- and middle-income countries</div>
-        </div>
-        <div class="why-card">
-          <div class="why-num">∞</div>
-          <div class="why-lbl">Lives reachable through education, community action &amp; mobile healthcare</div>
+        <div class="reveal">
+          <span class="label" style="margin-top:var(--sp-group);">Why This Work Matters</span>
+          <div class="why-strip">
+            <div class="why-card">
+              <div class="why-num">41M</div>
+              <div class="why-lbl">Deaths annually from NCDs — 74% of all global deaths (WHO, 2023)</div>
+            </div>
+            <div class="why-card">
+              <div class="why-num">77%</div>
+              <div class="why-lbl">Of NCD deaths occur in low- and middle-income countries</div>
+            </div>
+            <div class="why-card">
+              <div class="why-num">∞</div>
+              <div class="why-lbl">Lives reachable through education, community action &amp; mobile healthcare</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1060,6 +1088,40 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
   window.addEventListener('resize', function () {
     if (window.innerWidth > 1040 && drawer.classList.contains('open')) setDrawer(false);
   });
+
+  // ── ABOUT: COLLAPSIBLE BODY ──
+  var aboutToggle = document.getElementById('about-toggle');
+  var aboutPanel = document.getElementById('about-panel');
+  var aboutTitle = document.getElementById('about-title');
+
+  function setAbout(open) {
+    if (!aboutPanel) return;
+    aboutPanel.setAttribute('data-open', String(open));
+    aboutToggle.setAttribute('aria-expanded', String(open));
+    // The reveal observer never fires for zero-height content, so anything
+    // inside the panel would stay at opacity 0 on first open.
+    if (open) {
+      Array.prototype.forEach.call(aboutPanel.querySelectorAll('.reveal'), function (el) {
+        el.classList.add('visible');
+      });
+    }
+  }
+  function toggleAbout() { setAbout(aboutToggle.getAttribute('aria-expanded') !== 'true'); }
+
+  if (aboutToggle && aboutPanel) {
+    aboutToggle.addEventListener('click', toggleAbout);
+    aboutTitle.addEventListener('click', toggleAbout);
+
+    // Arriving at #about from the brand link, the nav, the footer or the hero
+    // CTA should show the content rather than an empty section.
+    document.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('a[href="#about"]')) setAbout(true);
+    });
+    window.addEventListener('hashchange', function () {
+      if (window.location.hash === '#about') setAbout(true);
+    });
+    if (window.location.hash === '#about') setAbout(true);
+  }
 
   // ── ACTIVE NAV STATE ──
   var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
