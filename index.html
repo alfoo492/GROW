@@ -172,7 +172,9 @@ header {
   min-height: calc(100vh - var(--header-h) - 47px);
   background: linear-gradient(to right, rgba(0,58,99,0.95) 52%, rgba(0,58,99,0.7)),
               url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-  display: flex; align-items: center; padding: 70px 5%; position: relative; overflow: hidden;
+  /* Top-aligned: with the GROW lockup gone, centering left a big gap under the
+     announcement bar. The badge now starts just below it. */
+  display: flex; align-items: flex-start; padding: 42px 5% 72px; position: relative; overflow: hidden;
 }
 .home::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 62% 50%, rgba(0,91,150,0.25) 0%, transparent 70%); pointer-events: none; }
 .home-inner { max-width: var(--wrap); margin: 0 auto; width: 100%; position: relative; z-index: 2; }
@@ -407,7 +409,7 @@ footer { background: #002a48; padding: 72px 5% 34px; }
 }
 @media (max-width: 640px) {
   .wrap, .event-inner, .support-inner { padding-top: 66px; padding-bottom: 66px; }
-  .home { padding: 54px 5%; min-height: 0; }
+  .home { padding: 32px 5% 56px; min-height: 0; }
   .nav-orb { width: 38px; height: 38px; }
   .nav-wordmark { font-size: 20px; }
   .nav-tagline { font-size: 9px; letter-spacing: 1.6px; }
