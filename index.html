@@ -215,6 +215,7 @@ header {
 .does-title { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
 .does-desc { font-size: 13.5px; color: rgba(255,255,255,0.55); line-height: 1.65; }
 .does-card a { color: var(--accent); font-weight: 600; }
+.does-soon { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--accent); }
 
 @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
 
@@ -339,20 +340,6 @@ header {
 .g-ph-icon { font-size: 30px; opacity: 0.5; }
 .g-ph-txt { font-size: 13px; color: var(--text-muted); font-weight: 500; line-height: 1.5; }
 
-/* ── ROADMAP ── */
-.road-bg { background: var(--white); }
-.roadmap { position: relative; margin-top: var(--sp-block); display: flex; flex-direction: column; }
-.roadmap::before { content: ''; position: absolute; left: 26px; top: 6px; bottom: 24px; width: 2px; background: linear-gradient(to bottom, var(--blue-mid), var(--blue-light)); }
-.rm-item { display: flex; gap: 26px; padding-bottom: 30px; position: relative; }
-.rm-dot { width: 54px; height: 54px; border-radius: 50%; background: var(--white); border: 2px solid var(--blue-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; z-index: 2; }
-.rm-dot span { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--blue-mid); }
-.rm-dot.active { background: var(--blue-mid); border-color: var(--blue-mid); }
-.rm-dot.active span { color: var(--white); }
-.rm-body { padding-top: 6px; }
-.rm-yr { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 5px; }
-.rm-body h3 { font-size: 18px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
-.rm-body p { font-size: 14.5px; color: var(--text-muted); line-height: 1.75; max-width: 720px; }
-
 /* ── TEAM ── */
 .team-bg { background: var(--bg); }
 .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: var(--sp-block); }
@@ -451,10 +438,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
   .inline-form { flex-direction: column; }
   .inline-form input, .inline-form button { width: 100%; }
-  .roadmap::before { left: 22px; }
-  .rm-dot { width: 46px; height: 46px; }
-  .rm-dot span { font-size: 14px; }
-  .rm-item { gap: 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -485,7 +468,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
       <li><a href="#programs">Programs</a></li>
       <li><a href="#events">Events</a></li>
       <li><a href="#impact">Impact</a></li>
-      <li><a href="#roadmap">Roadmap</a></li>
       <li><a href="#team">Team</a></li>
     </ul>
 
@@ -505,7 +487,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
     <li><a href="#programs">Programs</a></li>
     <li><a href="#events">Events</a></li>
     <li><a href="#impact">Impact</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#support" class="drawer-cta">Support Us</a></li>
   </ul>
@@ -550,7 +531,7 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
       <div class="does-card">
         <div class="does-icon" aria-hidden="true">🚐</div>
         <div class="does-title">Mobile Health</div>
-        <p class="does-desc">Mobile clinics and pharmacy services, funding our work long term. <a href="#roadmap">Our roadmap →</a></p>
+        <p class="does-desc">Mobile clinics and pharmacy services, funding our work long term. <span class="does-soon">Coming soon</span></p>
       </div>
     </div>
   </div>
@@ -908,58 +889,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
   </div>
 </section>
 
-<!-- ════ ROADMAP ════ -->
-<section class="road-bg" id="roadmap" aria-labelledby="roadmap-title">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="label">Five-Year Strategic Plan</span>
-      <h2 class="serif" id="roadmap-title">The path <em>forward</em></h2>
-    </div>
-    <ol class="roadmap">
-      <li class="rm-item reveal">
-        <div class="rm-dot active"><span>Y1</span></div>
-        <div class="rm-body">
-          <div class="rm-yr">2026 · In Progress</div>
-          <h3>Digital Launch, Community Building &amp; First Webinar</h3>
-          <p>Launched GROW's digital presence in May 2026 across Instagram and LinkedIn. Publishing AI-powered NCD education content in Swahili and English. Hosting our founding community webinar on 25th July 2026 to recruit members, build a strong volunteer base, and establish GROW's community-driven foundation.</p>
-        </div>
-      </li>
-      <li class="rm-item reveal">
-        <div class="rm-dot"><span>Y2</span></div>
-        <div class="rm-body">
-          <div class="rm-yr">2027 · Upcoming</div>
-          <h3>Institutional Partnerships &amp; Structured Outreach</h3>
-          <p>Establish formal partnerships with hospitals, universities, and global health organisations. Expand community outreach programs, grow GROW's volunteer network, and broaden multilingual content reach across additional digital platforms.</p>
-        </div>
-      </li>
-      <li class="rm-item reveal">
-        <div class="rm-dot"><span>Y3</span></div>
-        <div class="rm-body">
-          <div class="rm-yr">2028</div>
-          <h3>Mobile Outreach &amp; Preventive Screening Pilots</h3>
-          <p>Pilot mobile health clinic units to deliver NCD screenings and education directly to underserved communities. Launch preventive screening campaigns and structured community health education workshops across Tanzania.</p>
-        </div>
-      </li>
-      <li class="rm-item reveal">
-        <div class="rm-dot"><span>Y4</span></div>
-        <div class="rm-body">
-          <div class="rm-yr">2029</div>
-          <h3>Scaling Mobile Health Services</h3>
-          <p>Expand mobile clinic and pharmacy operations to additional communities. Deploy AI-assisted clinical decision support tools for field health workers and deepen partnerships with government health systems.</p>
-        </div>
-      </li>
-      <li class="rm-item reveal" style="padding-bottom:0">
-        <div class="rm-dot"><span>Y5</span></div>
-        <div class="rm-body">
-          <div class="rm-yr">2030</div>
-          <h3>Fully Operational Hybrid Model</h3>
-          <p>Achieve full integration of GROW's non-profit outreach arm and sustainable services division — operating mobile health clinics, pharmacy units, AI-powered education platforms, and institutional health partnerships serving communities locally and globally.</p>
-        </div>
-      </li>
-    </ol>
-  </div>
-</section>
-
 <!-- ════ TEAM ════ -->
 <section class="team-bg" id="team" aria-labelledby="team-title">
   <div class="wrap">
@@ -1067,7 +996,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
           <li><a href="#programs">Education Hub</a></li>
           <li><a href="#events">Upcoming Event</a></li>
           <li><a href="#impact">Our Impact</a></li>
-          <li><a href="#roadmap">Roadmap</a></li>
           <li><a href="#team">Our Team</a></li>
         </ul>
       </nav>
@@ -1077,8 +1005,8 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
           <li><a href="#programs">NCD Awareness</a></li>
           <li><a href="#programs">Cancer Education</a></li>
           <li><a href="#programs">Lifestyle &amp; Prevention</a></li>
-          <li><a href="#roadmap">Mobile Clinics</a></li>
-          <li><a href="#roadmap">Screening Campaigns</a></li>
+          <li><a href="#impact">Mobile Clinics</a></li>
+          <li><a href="#impact">Screening Campaigns</a></li>
         </ul>
       </div>
       <div class="footer-col">
