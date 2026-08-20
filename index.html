@@ -29,7 +29,7 @@
   --bg-alt:     #f2f2f2;
   --white:      #ffffff;
 
-  --header-h: 66px;
+  --header-h: 76px;
   --wrap: 1200px;
   --radius: 18px;
   --ease: cubic-bezier(.22,.61,.36,1);
@@ -68,12 +68,14 @@ header {
   height: var(--header-h); box-shadow: 0 2px 20px rgba(0,0,0,0.3);
 }
 .nav { max-width: var(--wrap); margin: 0 auto; padding: 0 5%; height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-.nav-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+/* The header is the site's only GROW branding lockup: mark + wordmark + tagline. */
+.nav-brand { display: flex; align-items: center; gap: 13px; flex-shrink: 0; }
 /* White fill: the mark is navy line art, so it disappears on the navy header. */
-.nav-orb { width: 36px; height: 36px; background: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+.nav-orb { width: 42px; height: 42px; background: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
 .nav-orb img { width: 100%; height: 100%; object-fit: contain; }
-.nav-wordmark { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; color: var(--white); letter-spacing: 0.4px; white-space: nowrap; }
-.nav-wordmark span { color: var(--accent); margin-left: 4px; }
+.nav-brand-text { display: flex; flex-direction: column; justify-content: center; }
+.nav-wordmark { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--white); letter-spacing: 0.4px; line-height: 1.05; white-space: nowrap; }
+.nav-tagline { font-size: 9.5px; font-weight: 600; letter-spacing: 2.4px; text-transform: uppercase; color: var(--accent); line-height: 1.2; margin-top: 4px; white-space: nowrap; }
 
 .nav-links { display: flex; align-items: center; gap: 4px; }
 .nav-links a {
@@ -164,12 +166,8 @@ header {
 }
 .home::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 62% 50%, rgba(0,91,150,0.25) 0%, transparent 70%); pointer-events: none; }
 .home-inner { max-width: var(--wrap); margin: 0 auto; width: 100%; position: relative; z-index: 2; }
-.home-mark { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; animation: fadeUp 0.5s ease both; }
-.home-mark-orb { width: 64px; height: 64px; background: var(--white); border-radius: 50%; overflow: hidden; flex-shrink: 0; box-shadow: 0 8px 26px rgba(0,0,0,0.25); }
-.home-mark-orb img { width: 100%; height: 100%; object-fit: contain; }
-.home-mark-name { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; color: var(--white); line-height: 1.2; }
-.home-mark-tag { font-size: 12.5px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-top: 3px; }
-.home-badge { display: inline-flex; align-items: center; gap: 9px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18); border-radius: 100px; padding: 7px 18px; margin-bottom: 22px; font-size: 11.5px; color: rgba(255,255,255,0.8); letter-spacing: 1.5px; text-transform: uppercase; animation: fadeUp 0.5s 0.04s ease both; }
+/* No GROW lockup here — the header carries the branding. The hero opens on the message. */
+.home-badge { display: inline-flex; align-items: center; gap: 9px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18); border-radius: 100px; padding: 7px 18px; margin-bottom: 24px; font-size: 11.5px; color: rgba(255,255,255,0.8); letter-spacing: 1.5px; text-transform: uppercase; animation: fadeUp 0.5s ease both; }
 .home-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
 .home h1 { font-family: 'Fraunces', serif; font-size: clamp(38px,5.2vw,66px); font-weight: 300; color: var(--white); line-height: 1.08; margin-bottom: 22px; max-width: 15ch; animation: fadeUp 0.6s 0.08s ease both; }
@@ -381,9 +379,12 @@ footer { background: #002a48; padding: 72px 5% 34px; }
   .impact-grid { grid-template-columns: repeat(2,1fr); }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
 }
-@media (max-width: 960px) {
+/* The header brand lockup is wider now, so the links collapse a little earlier. */
+@media (max-width: 1040px) {
   .nav-links, .nav > .nav-cta { display: none; }
   .nav-toggle { display: flex; }
+}
+@media (max-width: 960px) {
   .about-grid { grid-template-columns: 1fr; gap: 48px; }
   .event-inner { grid-template-columns: 1fr; gap: 44px; }
   .vid-grid { grid-template-columns: 1fr 1fr; }
@@ -397,7 +398,9 @@ footer { background: #002a48; padding: 72px 5% 34px; }
 @media (max-width: 640px) {
   .wrap, .event-inner, .support-inner { padding-top: 66px; padding-bottom: 66px; }
   .home { padding: 54px 5%; min-height: 0; }
-  .home-mark-orb { width: 54px; height: 54px; }
+  .nav-orb { width: 38px; height: 38px; }
+  .nav-wordmark { font-size: 20px; }
+  .nav-tagline { font-size: 9px; letter-spacing: 1.6px; }
   .vid-grid { grid-template-columns: 1fr; }
   .values-grid { grid-template-columns: 1fr; }
   .val-card.span2 { grid-column: span 1; }
@@ -429,9 +432,12 @@ footer { background: #002a48; padding: 72px 5% 34px; }
 <!-- ════ HEADER / NAV ════ -->
 <header>
   <nav class="nav" aria-label="Primary">
-    <a href="#home" class="nav-brand" aria-label="GROW — home">
-      <span class="nav-orb"><img src="logo.png" alt="GROW Global Health — Grace Reaches On Wheels" width="36" height="36"></span>
-      <span class="nav-wordmark">GROW<span>·</span></span>
+    <a href="#home" class="nav-brand" aria-label="GROW — Grace Reaches On Wheels — home">
+      <span class="nav-orb"><img src="logo.png" alt="GROW Global Health logo" width="42" height="42"></span>
+      <span class="nav-brand-text">
+        <span class="nav-wordmark">GROW</span>
+        <span class="nav-tagline">Grace Reaches On Wheels</span>
+      </span>
     </a>
 
     <ul class="nav-links" id="nav-links">
@@ -478,14 +484,6 @@ footer { background: #002a48; padding: 72px 5% 34px; }
 <!-- ════ HOME ════ -->
 <section class="home" id="home" aria-labelledby="home-title">
   <div class="home-inner">
-    <div class="home-mark">
-      <span class="home-mark-orb"><img src="logo.png" alt="" width="64" height="64"></span>
-      <span>
-        <span class="home-mark-name">GROW</span>
-        <span class="home-mark-tag">Grace Reaches On Wheels</span>
-      </span>
-    </div>
-
     <p class="home-badge"><span class="home-badge-dot" aria-hidden="true"></span>Digitally Launched May 2026 · Dar es Salaam</p>
 
     <h1 id="home-title">Empowering Communities. <em>Advancing</em> Health.</h1>
@@ -1093,7 +1091,7 @@ footer { background: #002a48; padding: 72px 5% 34px; }
     if (e.key === 'Escape' && drawer.classList.contains('open')) { setDrawer(false); toggle.focus(); }
   });
   window.addEventListener('resize', function () {
-    if (window.innerWidth > 960 && drawer.classList.contains('open')) setDrawer(false);
+    if (window.innerWidth > 1040 && drawer.classList.contains('open')) setDrawer(false);
   });
 
   // ── ACTIVE NAV STATE ──
