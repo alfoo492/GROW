@@ -244,8 +244,9 @@ header {
 .about-tab:hover, .about-tab[aria-selected="true"] { color: var(--blue-mid); }
 .about-tab[aria-selected="true"]::after { transform: scaleX(1); }
 .about-intro { margin-bottom: 0; }
-.about-intro h2 { margin: 0; }
+.about-intro h2 { margin: 0; text-align: center; }
 .about-panel-content > .about-grid { margin-top: 0; }
+.about-panel-content .about-text { width: 100%; max-width: none; }
 
 /* ── COLLAPSIBLE TABS (About body, Core Values) ──
    A label tab toggles the block below it. 0fr -> 1fr animates to the
