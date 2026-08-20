@@ -1222,6 +1222,12 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
       Array.prototype.forEach.call(panel.querySelectorAll('.reveal'), function (el) {
         el.classList.add('visible');
       });
+      window.setTimeout(function () {
+        var bounds = panel.getBoundingClientRect();
+        if (bounds.top < 0 || bounds.bottom > window.innerHeight) {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 340);
     }
   }
 
