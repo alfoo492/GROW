@@ -68,8 +68,18 @@ header {
   height: var(--header-h); box-shadow: 0 2px 20px rgba(0,0,0,0.3);
 }
 .nav { max-width: var(--wrap); margin: 0 auto; padding: 0 5%; height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-/* The header is the site's only GROW branding lockup: mark + wordmark + tagline. */
-.nav-brand { display: flex; align-items: center; gap: 13px; flex-shrink: 0; }
+/* The header is the site's only GROW branding lockup: mark + wordmark + tagline.
+   The whole lockup is the link to #about. It reads as a brand, not a hyperlink —
+   no underline, no link colour — so the hover pill, orb ring and pointer cursor
+   are what advertise that it's clickable. */
+.nav-brand {
+  display: flex; align-items: center; gap: 13px; flex-shrink: 0; cursor: pointer;
+  padding: 6px 12px; margin-left: -12px; border-radius: 14px;
+  transition: background 0.2s var(--ease);
+}
+.nav-brand:hover, .nav-brand:focus-visible { background: rgba(255,255,255,0.09); }
+.nav-brand:hover .nav-orb, .nav-brand:focus-visible .nav-orb { box-shadow: 0 0 0 3px rgba(77,163,255,0.5); }
+.nav-brand .nav-orb { transition: box-shadow 0.2s var(--ease); }
 /* White fill: the mark is navy line art, so it disappears on the navy header. */
 .nav-orb { width: 42px; height: 42px; background: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
 .nav-orb img { width: 100%; height: 100%; object-fit: contain; }
@@ -432,7 +442,7 @@ footer { background: #002a48; padding: 72px 5% 34px; }
 <!-- ════ HEADER / NAV ════ -->
 <header>
   <nav class="nav" aria-label="Primary">
-    <a href="#home" class="nav-brand" aria-label="GROW — Grace Reaches On Wheels — home">
+    <a href="#about" class="nav-brand" title="About GROW" aria-label="GROW — Grace Reaches On Wheels: about the organisation">
       <span class="nav-orb"><img src="logo.png" alt="GROW Global Health logo" width="42" height="42"></span>
       <span class="nav-brand-text">
         <span class="nav-wordmark">GROW</span>
