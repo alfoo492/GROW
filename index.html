@@ -231,7 +231,7 @@ header {
 .why-bg { background: var(--white); }
 /* Same white as About above it, so full section padding on both reads as
    one big gap — trim both sides of it and centre the heading. */
-.why-bg .wrap { padding-top: 0; }
+.why-bg .wrap { padding-top: 0; padding-bottom: 16px; }
 .why-bg .sec-head { text-align: center; margin: 0 auto 12px; }
 .about-tabs {
   display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #dbe7f2;
@@ -322,7 +322,11 @@ header {
 
 /* ── PROGRAMS (education) ── */
 .prog-bg { background: var(--blue-dark); }
-.prog-intro { font-size: 16px; color: rgba(255,255,255,0.58); line-height: 1.85; max-width: 640px; margin-top: 18px; }
+/* Why This Work Matters sits right above on white — trim the top so the
+   dark/white seam doesn't carry a full section of blank space either side. */
+.prog-bg .wrap { padding-top: 24px; }
+.prog-bg .sec-head { text-align: center; margin: 0 auto 12px; }
+.prog-intro { font-size: 16px; color: rgba(255,255,255,0.58); line-height: 1.85; max-width: 640px; margin: 18px auto 0; }
 .vid-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: var(--sp-block); }
 .vid-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); overflow: hidden; transition: transform 0.25s var(--ease), background 0.25s var(--ease); }
 .vid-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.1); }
@@ -335,7 +339,7 @@ header {
 .vid-body h3 { font-size: 16.5px; font-weight: 600; color: var(--white); margin-bottom: 7px; }
 .vid-body p { font-size: 13.5px; color: rgba(255,255,255,0.55); line-height: 1.65; }
 
-.lib-head { margin-top: var(--sp-group); margin-bottom: var(--sp-block); }
+.lib-head { margin-top: var(--sp-group); margin-bottom: var(--sp-block); text-align: center; }
 /* NCD library as an accordion — 6 topics x ~5 tips is too much open at once */
 .ncd-list { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-tight); align-items: start; }
 .ncd-item { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; overflow: hidden; transition: background 0.22s var(--ease), border-color 0.22s var(--ease); }
