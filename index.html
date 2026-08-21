@@ -184,35 +184,45 @@ header {
   /* Bottom trimmed from the standard --sec-pad: collapsed by default, the
      Explore Our Work tabs no longer need a full section's worth of run-off
      before About starts. */
-  display: flex; align-items: flex-start; padding: 42px 5% 32px; position: relative; overflow: hidden;
+  display: flex; align-items: flex-start; padding: 42px 5% 24px; position: relative; overflow: hidden;
 }
 .home-inner { max-width: var(--wrap); margin: 0 auto; width: 100%; position: relative; z-index: 2; }
 /* No GROW lockup here — the header carries the branding. The hero opens on the message. */
 .home-badge { display: inline-flex; align-items: center; gap: 9px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18); border-radius: 100px; padding: 7px 18px; margin-bottom: 24px; font-size: 11.5px; color: rgba(255,255,255,0.8); letter-spacing: 1.5px; text-transform: uppercase; animation: fadeUp 0.5s ease both; }
 .home-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
-/* Full container width, like the cards below and like the event section — a
-   narrower measure here left a ragged column of dead space on the right.
-   Heading centred over that width; intro justified flush to both edges. */
+/* Heading centred; intro now a centred, capped-width block too (was full
+   width, which read as an oddly long justified line above a now-centred
+   Explore Our Work). */
 .home h1 { font-family: 'Fraunces', serif; font-size: clamp(34px,4.4vw,54px); font-weight: 300; color: var(--white); line-height: 1.08; margin-bottom: 22px; text-align: center; animation: fadeUp 0.6s 0.08s ease both; }
 .home h1 em { font-style: italic; color: #7ecfff; }
-.home-intro { font-size: 16.5px; color: rgba(255,255,255,0.66); line-height: 1.8; margin-bottom: 34px; text-align: justify; text-indent: 0; hyphens: auto; animation: fadeUp 0.6s 0.16s ease both; }
+.home-intro { font-size: 16.5px; color: rgba(255,255,255,0.66); line-height: 1.8; margin: 0 auto 24px; max-width: 700px; text-align: justify; text-indent: 0; hyphens: auto; animation: fadeUp 0.6s 0.16s ease both; }
 /* "Explore Our Work" heading + tabs, collapsed by default — same tab/collapse
    pattern as Who Are We / Core Values / How AI Powers GROW, reusing those
    exact classes for guaranteed consistency, with dark-hero color overrides
    below (same treatment already applied to Events/Support/Team/footer). */
-.home-does { margin-top: 28px; text-align: center; animation: fadeUp 0.7s 0.32s ease both; }
-.does-heading { margin-bottom: 16px; }
+.home-does { margin-top: 20px; text-align: center; animation: fadeUp 0.7s 0.32s ease both; }
+.does-heading { margin-bottom: 12px; }
 /* Tabs and panels share the same 3-column grid so whichever card opens
-   lands directly under its own tab instead of centering under the row. */
-.home .about-tabs { display: grid; grid-template-columns: repeat(3,1fr); border-bottom: none; }
-.home .about-tab { color: rgba(255,255,255,0.55); }
-.home .about-tab:hover, .home .about-tab[aria-selected="true"] { color: var(--white); }
+   lands directly under its own tab instead of centering under the row.
+   Each tab is its own bordered pill at rest — flat text alone didn't read
+   as clickable — with a stronger hover and an accent-filled active state;
+   the shared ::after underline is dropped since the pill itself now carries
+   the selected indicator. */
+.home .about-tabs { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; border-bottom: none; }
+.home .about-tab {
+  color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.16); border-radius: 12px; padding: 11px 14px;
+  transition: color 0.25s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.home .about-tab::after { display: none; }
+.home .about-tab:hover { color: var(--white); background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
+.home .about-tab[aria-selected="true"] { color: var(--white); background: rgba(77,163,255,0.16); border-color: var(--accent); }
 .does-panels { display: grid; grid-template-columns: repeat(3,1fr); }
 .does-panel:nth-child(1) { grid-column: 1; }
 .does-panel:nth-child(2) { grid-column: 2; }
 .does-panel:nth-child(3) { grid-column: 3; }
-.does-panel .collapse-inner { padding-top: 14px; }
+.does-panel .collapse-inner { padding-top: 10px; }
 .does-card {
   background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13);
   border-radius: 12px; padding: 14px 16px; text-align: left;
@@ -230,7 +240,10 @@ header {
 
 /* ── ABOUT ── */
 .about-bg { background: var(--white); }
-.about-bg .wrap { padding-bottom: 0; }
+/* Home is dark and collapsed by default now too, so its own bottom padding
+   is already trimmed — this just keeps the hand-off from feeling abrupt at
+   the color change without reintroducing a full section's worth of gap. */
+.about-bg .wrap { padding-top: 28px; padding-bottom: 0; }
 
 /* ── WHY THIS WORK MATTERS ── */
 .why-bg { background: var(--white); }
