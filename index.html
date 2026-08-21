@@ -472,25 +472,27 @@ header {
 .team-bg .wrap { padding-top: 32px; padding-bottom: 32px; }
 .team-bg .sec-head { text-align: center; margin: 0 auto 12px; }
 .team-bg .tab-toggle { margin-left: 0; margin-right: 0; }
-/* Six cards (5 people + the join card) split evenly into two rows of 3. */
-/* All 5 board members in one row on desktop — the join card wraps onto
-   its own line below rather than squeezing into a 6th column. Cards
-   themselves are shrunk (smaller photo/avatar, tighter type) to fit. */
-.team-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; margin-top: var(--sp-block); }
+/* Four board members in one row on desktop; the join card wraps onto its
+   own full-width line below rather than squeezing into a 5th column. */
+.team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: var(--sp-block); }
 .team-card { background: var(--white); border: 1px solid #e4e9f0; border-radius: var(--radius); overflow: hidden; transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease); }
 .team-card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(0,58,99,0.1); }
-.team-photo-placeholder { height: 84px; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; }
-.team-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--blue-mid); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; }
-.team-info { padding: 14px 14px 18px; text-align: center; }
-.team-name { font-size: 13.5px; font-weight: 600; color: var(--text-dark); margin-bottom: 2px; }
-.team-role { font-size: 10px; color: var(--accent); font-weight: 600; letter-spacing: 0.3px; text-transform: uppercase; margin-bottom: 8px; }
-.team-bio { font-size: 11.5px; color: var(--text-muted); line-height: 1.55; margin-bottom: 12px; }
-.team-socials { display: flex; gap: 6px; justify-content: center; }
-.team-social-link { width: 26px; height: 26px; border-radius: 7px; border: 1px solid #e0e6ef; display: flex; align-items: center; justify-content: center; transition: background 0.2s, border-color 0.2s; }
-.team-social-link svg { width: 12px; height: 12px; fill: var(--blue-mid); }
+/* Real photos, not initials — a full-width square with object-fit:cover
+   keeps every face consistently framed regardless of the source photo's
+   own proportions. */
+.team-photo { position: relative; aspect-ratio: 1 / 1; background: var(--blue-pale); overflow: hidden; }
+.team-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.team-info { padding: 16px 16px 20px; text-align: center; }
+.team-name { font-size: 15px; font-weight: 600; color: var(--text-dark); margin-bottom: 2px; }
+.team-role { font-size: 11px; color: var(--accent); font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 6px; }
+.team-edu { font-size: 11.5px; color: var(--text-muted); font-style: italic; line-height: 1.5; margin-bottom: 8px; }
+.team-bio { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; }
+.team-socials { display: flex; gap: 8px; justify-content: center; }
+.team-social-link { width: 30px; height: 30px; border-radius: 8px; border: 1px solid #e0e6ef; display: flex; align-items: center; justify-content: center; transition: background 0.2s, border-color 0.2s; }
+.team-social-link svg { width: 14px; height: 14px; fill: var(--blue-mid); }
 .team-social-link:hover { background: var(--blue-pale); border-color: var(--blue-light); }
-/* Spans the full row — with 5 board members already filling row one, a
-   6th grid cell would leave the join card alone beside four empty ones. */
+/* Spans the full row — with 4 board members already filling row one, a
+   5th grid cell would leave the join card alone beside three empty ones. */
 .team-join { grid-column: 1 / -1; background: var(--blue-dark); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 26px 24px; }
 .team-join h3 { font-family: 'Fraunces', serif; font-size: 21px; font-weight: 400; color: var(--white); margin-bottom: 10px; }
 .team-join p { font-size: 13.5px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 18px; max-width: 460px; margin-left: auto; margin-right: auto; }
@@ -1128,16 +1130,17 @@ footer { background: #002a48; padding: 40px 5% 24px; }
       <div class="collapse-inner">
         <div class="team-grid">
           <article class="team-card reveal">
-            <div class="team-photo-placeholder"><div class="team-avatar">AF</div></div>
+            <div class="team-photo"><img src="team-debora-munuo.jpg" alt="Debora Munuo" loading="lazy"></div>
             <div class="team-info">
-              <div class="team-name">Alfoo [Surname]</div>
-              <div class="team-role">Founder &amp; Executive Director</div>
+              <div class="team-name">Debora Munuo</div>
+              <div class="team-role">Founder &amp; Director</div>
+              <div class="team-edu">Biomaterials Engineering and Pre-Medicine student at Alfred University, New York.</div>
               <p class="team-bio">Visionary behind GROW, driving the initiative's strategic direction, partnerships, and mission to bring NCDs education and outreach to underserved communities.</p>
               <div class="team-socials">
-                <a href="#" class="team-social-link" aria-label="Alfoo on LinkedIn">
+                <a href="https://www.linkedin.com/in/deboramunuo29" target="_blank" rel="noopener" class="team-social-link" aria-label="Debora Munuo on LinkedIn">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                 </a>
-                <a href="#" class="team-social-link" aria-label="Alfoo on Instagram">
+                <a href="https://www.instagram.com/graced_debrah/" target="_blank" rel="noopener" class="team-social-link" aria-label="Debora Munuo on Instagram">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                 </a>
               </div>
@@ -1145,16 +1148,16 @@ footer { background: #002a48; padding: 40px 5% 24px; }
           </article>
 
           <article class="team-card reveal">
-            <div class="team-photo-placeholder"><div class="team-avatar" style="background:var(--accent);">HD</div></div>
+            <div class="team-photo"><img src="team-joshua-wilson.jpg" alt="Joshua Wilson" loading="lazy"></div>
             <div class="team-info">
-              <div class="team-name">[Name] [Surname]</div>
-              <div class="team-role">Head of Health Education</div>
-              <p class="team-bio">Leads the development of GROW's NCDs education content strategy, ensuring clinical accuracy and cultural relevance across all digital and community programs.</p>
+              <div class="team-name">Joshua Wilson</div>
+              <div class="team-role">Secretary</div>
+              <div class="team-edu">Health Services Management student at St. John's University of Tanzania (SJUT).</div>
+              <p class="team-bio">Focused on public health, leadership, and health systems research.</p>
               <div class="team-socials">
-                <a href="#" class="team-social-link" aria-label="Head of Health Education on LinkedIn">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-                <a href="#" class="team-social-link" aria-label="Head of Health Education on Instagram">
+                <!-- No LinkedIn profile yet — add a linked icon matching the
+                     pattern used above once one is provided. Instagram only for now. -->
+                <a href="https://www.instagram.com/joshua.wilson__/" target="_blank" rel="noopener" class="team-social-link" aria-label="Joshua Wilson on Instagram">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                 </a>
               </div>
@@ -1162,16 +1165,17 @@ footer { background: #002a48; padding: 40px 5% 24px; }
           </article>
 
           <article class="team-card reveal">
-            <div class="team-photo-placeholder"><div class="team-avatar" style="background:#005b96;">TI</div></div>
+            <div class="team-photo"><img src="team-alfred-king.jpg" alt="Alfred King" loading="lazy"></div>
             <div class="team-info">
-              <div class="team-name">[Name] [Surname]</div>
-              <div class="team-role">Technology &amp; AI Lead</div>
-              <p class="team-bio">Oversees GROW's AI integration across content generation, health analytics, and digital platforms — building the technological foundation for scalable community health.</p>
+              <div class="team-name">Alfred King</div>
+              <div class="team-role">Project Lead</div>
+              <div class="team-edu">Biomaterials Engineering and Communication Studies student.</div>
+              <p class="team-bio">Passionate about creating meaningful impact through storytelling.</p>
               <div class="team-socials">
-                <a href="#" class="team-social-link" aria-label="Technology and AI Lead on LinkedIn">
+                <a href="https://www.linkedin.com/in/alfredking492" target="_blank" rel="noopener" class="team-social-link" aria-label="Alfred King on LinkedIn">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                 </a>
-                <a href="#" class="team-social-link" aria-label="Technology and AI Lead on Instagram">
+                <a href="https://www.instagram.com/_aalfoo/" target="_blank" rel="noopener" class="team-social-link" aria-label="Alfred King on Instagram">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                 </a>
               </div>
@@ -1179,33 +1183,17 @@ footer { background: #002a48; padding: 40px 5% 24px; }
           </article>
 
           <article class="team-card reveal">
-            <div class="team-photo-placeholder"><div class="team-avatar" style="background:var(--blue-dark);">??</div></div>
+            <div class="team-photo"><img src="team-mary-fares.jpg" alt="Mary Fares" loading="lazy"></div>
             <div class="team-info">
-              <div class="team-name">[Name] [Surname]</div>
-              <div class="team-role">[Role]</div>
-              <p class="team-bio">[Add a short bio for this board member.]</p>
+              <div class="team-name">Mary Fares</div>
+              <div class="team-role">Treasurer</div>
+              <div class="team-edu">Doctor of Medicine student at MUHAS.</div>
+              <p class="team-bio">NCDs advocate and SRHR advocate.</p>
               <div class="team-socials">
-                <a href="#" class="team-social-link" aria-label="Board member on LinkedIn">
+                <a href="https://www.linkedin.com/in/mary-mahuha-173368319" target="_blank" rel="noopener" class="team-social-link" aria-label="Mary Fares on LinkedIn">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                 </a>
-                <a href="#" class="team-social-link" aria-label="Board member on Instagram">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="team-card reveal">
-            <div class="team-photo-placeholder"><div class="team-avatar" style="background:var(--navy);">??</div></div>
-            <div class="team-info">
-              <div class="team-name">[Name] [Surname]</div>
-              <div class="team-role">[Role]</div>
-              <p class="team-bio">[Add a short bio for this board member.]</p>
-              <div class="team-socials">
-                <a href="#" class="team-social-link" aria-label="Board member on LinkedIn">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-                <a href="#" class="team-social-link" aria-label="Board member on Instagram">
+                <a href="https://www.instagram.com/_maryfares/" target="_blank" rel="noopener" class="team-social-link" aria-label="Mary Fares on Instagram">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                 </a>
               </div>
