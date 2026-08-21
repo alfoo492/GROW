@@ -1139,13 +1139,14 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
   // ── ABOUT TABS ──
   var about = document.getElementById('about');
   var aboutHead = about.querySelector('.sec-head');
-  var aboutBody = about.querySelector('#about-panel .collapse-inner');
+  var aboutOuterPanel = about.querySelector('#about-panel');
+  var aboutBody = aboutOuterPanel.querySelector('.collapse-inner');
   var aboutGrid = aboutBody.querySelector('.about-grid');
   var aboutText = aboutGrid.querySelector('.about-text');
   var valuesGrid = aboutGrid.querySelector('.values-grid');
   var aiUses = aboutGrid.querySelector('.ai-uses');
   var valuesToggle = aboutGrid.querySelector('.tab-toggle');
-  var whyBlock = aboutBody.querySelector('.reveal:last-child');
+  var whyBlock = aboutBody.lastElementChild;
   var tabs = document.createElement('div');
   tabs.className = 'about-tabs';
   tabs.setAttribute('role', 'tablist');
@@ -1202,6 +1203,10 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
   aboutHead.querySelector('.tab-toggle').remove();
   valuesToggle.remove();
   aboutHead.parentNode.insertBefore(tabs, aboutHead);
+  // The tab panels now own their own open/closed state; the wrapper that
+  // used to gate all of #about-panel just needs to stay expanded so it
+  // doesn't hide them behind its own collapsed grid-template-rows/opacity.
+  aboutOuterPanel.setAttribute('data-open', 'true');
 
   var collapseTriggers = Array.prototype.slice.call(tabs.querySelectorAll('[role="tab"]'));
   var collapsePanels = [whoPanel, valuesPanel, aiPanel];
