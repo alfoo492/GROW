@@ -360,8 +360,10 @@ header {
 /* ── EVENTS ── */
 .event-bg { background: var(--navy); }
 /* Compact by default like the About tabs — trimmed top/bottom padding since
-   the collapsed state is now just the toggle + heading, not the full card. */
-.event-bg .wrap { padding-top: 32px; padding-bottom: 32px; }
+   the collapsed state is now just the toggle + heading, not the full card.
+   Bottom trimmed further still: Support right below shares the same navy,
+   so a full gap on both sides would read as one big blank band. */
+.event-bg .wrap { padding-top: 32px; padding-bottom: 8px; }
 .event-bg .sec-head { text-align: center; margin: 0 auto 12px; }
 /* .tab-toggle's -11px left margin nudges it back under left-aligned body
    text; centred here, that same offset would read as off-centre. */
@@ -408,6 +410,7 @@ header {
 
 /* ── TEAM ── */
 .team-bg { background: var(--bg); }
+.team-bg .wrap { padding-top: 40px; }
 .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: var(--sp-block); }
 .team-card { background: var(--white); border: 1px solid #e4e9f0; border-radius: var(--radius); overflow: hidden; transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease); }
 .team-card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(0,58,99,0.1); }
@@ -429,9 +432,21 @@ header {
 
 /* ── SUPPORT ── */
 .support-bg { background: var(--navy); }
-.support-inner { max-width: var(--wrap); margin: 0 auto; padding: var(--sec-pad) 5%; display: flex; gap: var(--sp-group); align-items: center; flex-wrap: wrap; }
+/* Same navy as Events right above it — flush top like the About/Why seam.
+   Bottom stays a bit more open since Team below switches to a light bg. */
+.support-bg .wrap { padding-top: 8px; padding-bottom: 32px; }
+.support-bg .sec-head { text-align: center; margin: 0 auto 12px; }
+.support-bg .tab-toggle { margin-left: 0; margin-right: 0; }
+.support-bg .tab-chev { stroke: rgba(255,255,255,0.5); }
+.support-bg .tab-toggle[aria-expanded="true"] .tab-chev { stroke: var(--accent); }
+@media (hover: hover) {
+  .support-bg .tab-toggle:hover { background: rgba(255,255,255,0.08); }
+  .support-bg .tab-toggle:hover .label { color: var(--white); }
+  .support-bg .tab-toggle:hover .tab-chev { stroke: var(--accent); }
+}
+.support-inner { display: flex; gap: var(--sp-group); align-items: center; flex-wrap: wrap; margin-top: var(--sp-block); }
 .support-txt { flex: 1 1 340px; }
-.support-txt p { font-size: 16px; color: rgba(255,255,255,0.58); line-height: 1.85; margin-top: 18px; max-width: 600px; }
+.support-txt p { font-size: 16px; color: rgba(255,255,255,0.58); line-height: 1.85; max-width: 600px; }
 .support-card { flex: 0 0 400px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.11); border-radius: 22px; padding: 34px; }
 .support-card h3 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; color: var(--white); margin-bottom: 6px; }
 .support-card .sub { font-size: 13.5px; color: rgba(255,255,255,0.5); margin-bottom: 22px; }
@@ -895,6 +910,43 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
   </div>
 </section>
 
+<!-- ════ SUPPORT ════ -->
+<section class="support-bg" id="support" aria-labelledby="support-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <button type="button" class="tab-toggle" id="support-toggle" aria-expanded="false" aria-controls="support-panel">
+        <span class="label label-light">Support GROW</span>
+        <svg class="tab-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <h2 class="serif serif-white" id="support-title">Grace reaches further<br>with <em>your support</em></h2>
+    </div>
+
+    <div class="collapse" id="support-panel" data-open="false" aria-hidden="true">
+      <div class="collapse-inner">
+        <div class="support-inner">
+          <div class="support-txt reveal">
+            <p>Every gift helps GROW create life-saving health education, grow our community, and bring mobile health services to the people who need them most.</p>
+          </div>
+          <div class="support-card reveal">
+            <h3>Make a Donation</h3>
+            <p class="sub">Donation channels will open as our programs scale.</p>
+            <div class="support-soon">
+              <div class="soon-badge">Coming Soon</div>
+              <p>We're still building our community. Sign up to be notified when donations open, and help us get there faster.</p>
+            </div>
+            <form class="inline-form" id="notify-form" novalidate>
+              <label for="notify-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Your email address</label>
+              <input type="email" id="notify-email" name="email" placeholder="your@email.com" required>
+              <button type="submit" id="notify-btn">Notify Me</button>
+            </form>
+            <p class="form-note" id="notify-note" role="status"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ════ TEAM ════ -->
 <section class="team-bg" id="team" aria-labelledby="team-title">
   <div class="wrap">
@@ -955,31 +1007,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
         <p>We are actively growing our team of health professionals, technologists, educators, and community advocates. Join us at the founding stage and help shape GROW's future.</p>
         <a href="#events" class="team-join-btn">Join Our Team →</a>
       </article>
-    </div>
-  </div>
-</section>
-
-<!-- ════ SUPPORT ════ -->
-<section class="support-bg" id="support" aria-labelledby="support-title">
-  <div class="support-inner">
-    <div class="support-txt reveal">
-      <span class="label label-light">Support GROW</span>
-      <h2 class="serif serif-white" id="support-title">Grace reaches further<br>with <em>your support</em></h2>
-      <p>Every gift helps GROW create life-saving health education, grow our community, and bring mobile health services to the people who need them most.</p>
-    </div>
-    <div class="support-card reveal">
-      <h3>Make a Donation</h3>
-      <p class="sub">Donation channels will open as our programs scale.</p>
-      <div class="support-soon">
-        <div class="soon-badge">Coming Soon</div>
-        <p>We're still building our community. Sign up to be notified when donations open, and help us get there faster.</p>
-      </div>
-      <form class="inline-form" id="notify-form" novalidate>
-        <label for="notify-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Your email address</label>
-        <input type="email" id="notify-email" name="email" placeholder="your@email.com" required>
-        <button type="submit" id="notify-btn">Notify Me</button>
-      </form>
-      <p class="form-note" id="notify-note" role="status"></p>
     </div>
   </div>
 </section>
@@ -1191,35 +1218,39 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
   });
   if (window.location.hash === '#about') setCollapse('about-panel-who', true);
 
-  // ── EVENTS TOGGLE ──
+  // ── SIMPLE TOGGLE SECTIONS (Events, Support) ──
   // Same collapse mechanism and fade/slide-down as the About tabs, just a
   // single toggle rather than a tablist.
-  var eventsToggle = document.getElementById('events-toggle');
-  var eventsPanel = document.getElementById('events-panel');
-  if (eventsToggle && eventsPanel) {
-    var setEventsOpen = function (open) {
-      eventsToggle.setAttribute('aria-expanded', String(open));
-      eventsPanel.setAttribute('data-open', String(open));
-      eventsPanel.setAttribute('aria-hidden', String(!open));
+  function initToggleSection(toggleId, panelId) {
+    var toggle = document.getElementById(toggleId);
+    var panel = document.getElementById(panelId);
+    if (!toggle || !panel) return;
+    var setOpen = function (open) {
+      toggle.setAttribute('aria-expanded', String(open));
+      panel.setAttribute('data-open', String(open));
+      panel.setAttribute('aria-hidden', String(!open));
       if (open) {
-        Array.prototype.forEach.call(eventsPanel.querySelectorAll('.reveal'), function (el) {
+        Array.prototype.forEach.call(panel.querySelectorAll('.reveal'), function (el) {
           el.classList.add('visible');
         });
       }
     };
-    eventsToggle.addEventListener('click', function () {
-      setEventsOpen(eventsToggle.getAttribute('aria-expanded') !== 'true');
+    toggle.addEventListener('click', function () {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
     });
-    // Arriving at #events (announcement bar, nav, footer, hero cards) should
-    // show the event rather than just scroll to a collapsed heading.
+    // Arriving via a direct link to this section should show its content
+    // rather than just scroll to a collapsed heading.
+    var hash = '#' + panel.closest('section').id;
     document.addEventListener('click', function (e) {
-      if (e.target.closest && e.target.closest('a[href="#events"]')) setEventsOpen(true);
+      if (e.target.closest && e.target.closest('a[href="' + hash + '"]')) setOpen(true);
     });
     window.addEventListener('hashchange', function () {
-      if (window.location.hash === '#events') setEventsOpen(true);
+      if (window.location.hash === hash) setOpen(true);
     });
-    if (window.location.hash === '#events') setEventsOpen(true);
+    if (window.location.hash === hash) setOpen(true);
   }
+  initToggleSection('events-toggle', 'events-panel');
+  initToggleSection('support-toggle', 'support-panel');
 
   // ── ACTIVE NAV STATE ──
   var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
