@@ -381,30 +381,6 @@ header {
 .inline-form button:hover { background: var(--accent-dark); }
 .form-note { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 10px; }
 
-/* ── IMPACT (goals + gallery) ── */
-.impact-bg { background: var(--bg-alt); }
-.impact-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: var(--sp-block); }
-.imp-card { background: var(--white); border: 1px solid #e4e9f0; border-radius: 16px; padding: 26px 22px; transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease); }
-.imp-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,58,99,0.09); }
-.imp-num { font-family: 'Fraunces', serif; font-size: 34px; font-weight: 300; color: var(--blue-mid); line-height: 1; margin-bottom: 10px; }
-.imp-num sub { font-size: 15px; color: var(--text-muted); }
-.imp-lbl { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
-.impact-quote { font-family: 'Fraunces', serif; font-size: clamp(18px,1.9vw,23px); font-weight: 300; font-style: italic; color: var(--blue-dark); line-height: 1.55; text-align: center; max-width: 780px; margin: var(--sp-block) auto 0; }
-
-.gallery-head { margin-top: var(--sp-group); display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; margin-bottom: var(--sp-block); }
-.gallery-head p { font-size: 15px; color: var(--text-muted); line-height: 1.75; max-width: 420px; }
-.gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-.g-card { position: relative; height: 215px; border-radius: var(--radius); overflow: hidden; background-size: cover; background-position: center; transition: transform 0.3s var(--ease); }
-.g-card:hover { transform: translateY(-4px); }
-/* Six tiles with one spanning two columns filled 3 rows and left the last one
-   almost empty. Equal tiles across 3 columns = 2 clean rows. The wide variant
-   is kept for the 2-column breakpoint below. */
-.g-overlay { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 22px; }
-.g-label { font-size: 13.5px; font-weight: 600; color: var(--white); line-height: 1.45; }
-.g-ph { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 22px; gap: 10px; }
-.g-ph-icon { font-size: 30px; opacity: 0.5; }
-.g-ph-txt { font-size: 13px; color: var(--text-muted); font-weight: 500; line-height: 1.5; }
-
 /* ── TEAM ── */
 .team-bg { background: var(--bg); }
 .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: var(--sp-block); }
@@ -464,7 +440,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .team-grid { grid-template-columns: repeat(2,1fr); }
-  .impact-grid { grid-template-columns: repeat(2,1fr); }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
 }
 /* The header brand lockup is wider now, so the links collapse a little earlier. */
@@ -477,8 +452,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
   .event-inner { grid-template-columns: 1fr; gap: var(--sp-block); }
   .vid-grid { grid-template-columns: 1fr 1fr; }
   .ncd-list { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: 1fr 1fr; }
-  .g-card.large { grid-column: span 2; }
   .home-does { grid-template-columns: 1fr; gap: 12px; }
   .why-strip { grid-template-columns: 1fr; }
   .support-card { flex: 1 1 100%; }
@@ -500,9 +473,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
   .about-tab:last-child { flex-basis: 100%; }
   .about-tab::after { left: 8px; right: 8px; }
   .val-card.span2 { grid-column: span 1; }
-  .gallery-grid { grid-template-columns: 1fr; }
-  .g-card.large { grid-column: span 1; }
-  .impact-grid { grid-template-columns: 1fr 1fr; }
   .team-grid { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
   .inline-form { flex-direction: column; }
@@ -536,7 +506,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
       <li><a href="#about">About</a></li>
       <li><a href="#programs">Programs</a></li>
       <li><a href="#events">Events</a></li>
-      <li><a href="#impact">Impact</a></li>
       <li><a href="#team">Team</a></li>
     </ul>
 
@@ -555,7 +524,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
     <li><a href="#about">About</a></li>
     <li><a href="#programs">Programs</a></li>
     <li><a href="#events">Events</a></li>
-    <li><a href="#impact">Impact</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#support" class="drawer-cta">Support Us</a></li>
   </ul>
@@ -890,80 +858,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
   </div>
 </section>
 
-<!-- ════ IMPACT (goals + gallery) ════ -->
-<section class="impact-bg" id="impact" aria-labelledby="impact-title">
-  <div class="wrap">
-    <div class="sec-head reveal" style="text-align:center;margin:0 auto 0;">
-      <span class="label">Our Goals</span>
-      <h2 class="serif" id="impact-title">Measuring what <em>matters</em></h2>
-    </div>
-
-    <div class="impact-grid">
-      <div class="imp-card reveal">
-        <div class="imp-num">May<sub> '26</sub></div>
-        <div class="imp-lbl">Digital launch — beginning of GROW's NCD education campaign on Instagram and LinkedIn</div>
-      </div>
-      <div class="imp-card reveal">
-        <div class="imp-num">25<sub>Jul</sub></div>
-        <div class="imp-lbl">Founding community webinar — recruiting members to build GROW's core network</div>
-      </div>
-      <div class="imp-card reveal">
-        <div class="imp-num">5<sub>yr</sub></div>
-        <div class="imp-lbl">Roadmap to a fully operational hybrid mobile health and outreach model</div>
-      </div>
-      <div class="imp-card reveal">
-        <div class="imp-num">∞</div>
-        <div class="imp-lbl">Communities reachable through scalable digital education and mobile healthcare</div>
-      </div>
-    </div>
-
-    <blockquote class="impact-quote reveal">"We measure success not just in numbers, but in awareness raised, fears eased, and communities taking charge of their own health."</blockquote>
-
-    <div class="gallery-head reveal">
-      <div>
-        <span class="label">Our Journey</span>
-        <h3 class="serif" style="font-size:clamp(24px,2.6vw,34px);">Where we are <em>headed</em></h3>
-      </div>
-      <p>GROW launched digitally in May 2026. This gallery will grow with us — every community reached, every session held, every milestone along the way.</p>
-    </div>
-
-    <div class="gallery-grid">
-      <div class="g-card large reveal"
-        style="background-image:linear-gradient(rgba(0,0,0,0.08),rgba(0,0,0,0.58)),url('https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=900&q=70')">
-        <div class="g-overlay"><div class="g-label">Digital Launch — May 2026 · Dar es Salaam</div></div>
-      </div>
-      <div class="g-card reveal"
-        style="background-image:linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.62)),url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=70')">
-        <div class="g-overlay"><div class="g-label">NCD Awareness Content — Instagram &amp; LinkedIn</div></div>
-      </div>
-      <div class="g-card reveal" style="background:none;border:2px dashed #c8d8ee;">
-        <div class="g-ph">
-          <div class="g-ph-icon" aria-hidden="true">🖥️</div>
-          <div class="g-ph-txt">Founding Community Webinar · 25 July 2026</div>
-        </div>
-      </div>
-      <div class="g-card reveal" style="background:none;border:2px dashed #c8d8ee;">
-        <div class="g-ph">
-          <div class="g-ph-icon" aria-hidden="true">🤝</div>
-          <div class="g-ph-txt">Community Outreach Programs · Coming Soon</div>
-        </div>
-      </div>
-      <div class="g-card reveal" style="background:none;border:2px dashed #c8d8ee;">
-        <div class="g-ph">
-          <div class="g-ph-icon" aria-hidden="true">🚐</div>
-          <div class="g-ph-txt">Mobile Health Clinic Pilots · Phase 3</div>
-        </div>
-      </div>
-      <div class="g-card reveal" style="background:none;border:2px dashed #c8d8ee;">
-        <div class="g-ph">
-          <div class="g-ph-icon" aria-hidden="true">🌍</div>
-          <div class="g-ph-txt">Preventive Screening Campaigns · Future</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ════ TEAM ════ -->
 <section class="team-bg" id="team" aria-labelledby="team-title">
   <div class="wrap">
@@ -1070,7 +964,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
           <li><a href="#about">About Us</a></li>
           <li><a href="#programs">Education Hub</a></li>
           <li><a href="#events">Upcoming Event</a></li>
-          <li><a href="#impact">Our Impact</a></li>
           <li><a href="#team">Our Team</a></li>
         </ul>
       </nav>
@@ -1080,8 +973,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
           <li><a href="#programs">NCD Awareness</a></li>
           <li><a href="#programs">Cancer Education</a></li>
           <li><a href="#programs">Lifestyle &amp; Prevention</a></li>
-          <li><a href="#impact">Mobile Clinics</a></li>
-          <li><a href="#impact">Screening Campaigns</a></li>
         </ul>
       </div>
       <div class="footer-col">
