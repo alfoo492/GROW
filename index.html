@@ -228,6 +228,10 @@ header {
 
 /* ── WHY THIS WORK MATTERS ── */
 .why-bg { background: var(--white); }
+/* Same white as About above it, so full section padding on both reads as
+   one big gap — trim just the top here and centre the heading in it. */
+.why-bg .wrap { padding-top: 20px; }
+.why-bg .sec-head { text-align: center; margin: 0 auto 12px; }
 .about-tabs {
   display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #dbe7f2;
   margin-bottom: 26px; overflow-x: auto; scrollbar-width: none;
