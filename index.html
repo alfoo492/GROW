@@ -225,6 +225,10 @@ header {
 
 /* ── ABOUT ── */
 .about-bg { background: var(--white); }
+/* The shared .sec-head caps at 700px, which left a wide empty gap on the
+   right of this heading. The About title runs the full section width
+   instead, same as the announcement bar above it. */
+#about .sec-head { max-width: none; }
 .about-tabs {
   display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #dbe7f2;
   margin-bottom: 26px; overflow-x: auto; scrollbar-width: none;
@@ -283,11 +287,9 @@ header {
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-block) var(--sp-group); align-items: start; margin-top: var(--sp-tight); }
 /* Justified to both container edges, no first-line indent. hyphens keeps the
    word spacing even once the columns narrow. */
-.about-text p, .about-quote p, .val-desc { text-align: justify; text-indent: 0; hyphens: auto; }
+.about-text p, .val-desc { text-align: justify; text-indent: 0; hyphens: auto; }
 .about-text p { font-size: 16px; color: var(--text-mid); line-height: 1.85; margin-bottom: 16px; }
 .about-text p:last-child { margin-bottom: 0; }
-.about-quote { border-left: 3px solid var(--blue-mid); padding: 14px 0 14px 22px; margin: 0 0 20px; }
-.about-quote p { font-family: 'Fraunces', serif; font-size: 18.5px; font-weight: 300; font-style: italic; color: var(--blue-dark); line-height: 1.55; }
 
 /* why-NCDs stats (moved off the homepage) */
 .why-strip { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: var(--sp-block); }
@@ -615,9 +617,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
       <div class="collapse-inner">
         <div class="about-grid">
           <div class="about-text reveal">
-            <blockquote class="about-quote">
-              <p>"To educate communities, support patients, and help people take charge of their health — one conversation at a time."</p>
-            </blockquote>
             <p>GROW – Grace Reaches On Wheels is a Tanzania-founded health initiative focused on helping underserved communities prevent and manage NCDs through culturally relevant education, technology, and community outreach. Since launching in May 2026, GROW has combined digital and AI-powered solutions with plans to expand into mobile health services and local partnerships through a sustainable hybrid model.</p>
 
             <div style="margin-top:26px;">
