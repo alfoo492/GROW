@@ -356,13 +356,9 @@ header {
 .vid-body { padding: 20px 22px 24px; }
 .vid-body h3 { font-size: 16.5px; font-weight: 600; color: var(--white); margin-bottom: 7px; }
 .vid-body p { font-size: 13.5px; color: rgba(255,255,255,0.55); line-height: 1.65; }
-/* No video behind this one — it's a text CTA into About, not a thumbnail
-   card, so it skips .vid-thumb entirely and centers its own body instead. */
-.vid-card-cta { display: flex; align-items: center; }
-.vid-card-cta .vid-body { text-align: center; padding: 26px 24px; }
-.vid-cta-link { color: inherit; transition: color 0.2s var(--ease); }
-.vid-cta-link:hover { color: var(--accent); }
-.vid-card-cta .vid-body p { font-size: 13px; text-align: justify; text-indent: 0; hyphens: auto; }
+/* Whole card is a link into About — reset anchor defaults so it behaves
+   like the plain (currently non-clickable) video cards beside it. */
+.vid-card-link { display: block; color: inherit; text-decoration: none; }
 
 .lib-head { margin-top: var(--sp-group); margin-bottom: var(--sp-block); text-align: center; }
 /* NCD library as an accordion — 6 topics x ~5 tips is too much open at once */
@@ -811,11 +807,17 @@ footer { background: #002a48; padding: 40px 5% 24px; }
           <p>Simple, proven ways to lower your NCDs risk — diet, activity, quitting tobacco, and regular screening.</p>
         </div>
       </article>
-      <article class="vid-card vid-card-cta reveal">
-        <div class="vid-body">
-          <h3><a href="#about" class="vid-cta-link">Get to Know More About GROW</a></h3>
-          <p>GROW is working to make health information and support more accessible to underserved communities. Through culturally relevant education, community outreach, technology, and AI-powered solutions, we aim to help people better understand, prevent, and manage non-communicable diseases. As GROW expands into mobile health services and local partnerships, our goal is to empower communities with the knowledge, tools, and support needed to make healthier decisions and build stronger, healthier futures.</p>
-        </div>
+      <article class="vid-card reveal">
+        <a href="#about" class="vid-card-link" aria-label="Get to Know More About GROW">
+          <div class="vid-thumb">
+            <div class="vid-thumb-bg" style="background-image:url('https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=60')"></div>
+            <div class="vid-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+          <div class="vid-body">
+            <h3>Get to Know More About GROW</h3>
+            <p>How GROW combines education, technology, and community outreach to help people prevent and manage NCDs.</p>
+          </div>
+        </a>
       </article>
     </div>
 
