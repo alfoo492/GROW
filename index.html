@@ -166,15 +166,6 @@ header {
 .announce-cta:hover { opacity: 0.88; }
 
 /* ── BUTTONS ── */
-.btn-primary {
-  background: var(--accent); color: var(--white); padding: 14px 32px; border-radius: 100px;
-  font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 10px;
-  transition: background 0.2s var(--ease), transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-  box-shadow: 0 6px 20px rgba(77,163,255,0.25);
-}
-.btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 10px 26px rgba(77,163,255,0.32); }
-.btn-primary svg { transition: transform 0.2s var(--ease); }
-.btn-primary:hover svg { transform: translateX(4px); }
 .btn-outline { color: rgba(255,255,255,0.72); font-size: 15px; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
 .btn-outline:hover { color: var(--white); }
 .btn-outline svg { transition: transform 0.2s var(--ease); }
@@ -190,7 +181,10 @@ header {
               url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
   /* Top-aligned: with the GROW lockup gone, centering left a big gap under the
      announcement bar. The badge now starts just below it. */
-  display: flex; align-items: flex-start; padding: 42px 5% var(--sec-pad); position: relative; overflow: hidden;
+  /* Bottom trimmed from the standard --sec-pad: collapsed by default, the
+     Explore Our Work tabs no longer need a full section's worth of run-off
+     before About starts. */
+  display: flex; align-items: flex-start; padding: 42px 5% 32px; position: relative; overflow: hidden;
 }
 .home-inner { max-width: var(--wrap); margin: 0 auto; width: 100%; position: relative; z-index: 2; }
 /* No GROW lockup here — the header carries the branding. The hero opens on the message. */
@@ -203,16 +197,21 @@ header {
 .home h1 { font-family: 'Fraunces', serif; font-size: clamp(34px,4.4vw,54px); font-weight: 300; color: var(--white); line-height: 1.08; margin-bottom: 22px; text-align: center; animation: fadeUp 0.6s 0.08s ease both; }
 .home h1 em { font-style: italic; color: #7ecfff; }
 .home-intro { font-size: 16.5px; color: rgba(255,255,255,0.66); line-height: 1.8; margin-bottom: 34px; text-align: justify; text-indent: 0; hyphens: auto; animation: fadeUp 0.6s 0.16s ease both; }
-.home-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; animation: fadeUp 0.6s 0.24s ease both; }
-
-.home-does { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: var(--sp-block); animation: fadeUp 0.7s 0.32s ease both; }
+/* "Explore Our Work" heading + tabs, collapsed by default — same tab/collapse
+   pattern as Who Are We / Core Values / How AI Powers GROW, reusing those
+   exact classes for guaranteed consistency, with dark-hero color overrides
+   below (same treatment already applied to Events/Support/Team/footer). */
+.home-does { margin-top: 28px; text-align: center; animation: fadeUp 0.7s 0.32s ease both; }
+.does-heading { margin-bottom: 16px; }
+.home .about-tabs { justify-content: center; border-bottom: none; }
+.home .about-tab { color: rgba(255,255,255,0.55); }
+.home .about-tab:hover, .home .about-tab[aria-selected="true"] { color: var(--white); }
+.does-panel .collapse-inner { padding-top: 18px; display: flex; justify-content: center; }
 .does-card {
   background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13);
-  border-radius: 16px; padding: 22px 24px; transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  border-radius: 16px; padding: 22px 24px; max-width: 420px; text-align: left;
 }
-.does-card:hover { background: rgba(255,255,255,0.11); transform: translateY(-3px); }
 .does-icon { font-size: 22px; margin-bottom: 12px; }
-.does-title { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
 .does-desc { font-size: 13.5px; color: rgba(255,255,255,0.55); line-height: 1.65; }
 .does-card a { color: var(--accent); font-weight: 600; }
 .does-soon { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--accent); }
@@ -514,7 +513,6 @@ footer { background: #002a48; padding: 40px 5% 24px; }
   .event-inner { grid-template-columns: 1fr; gap: var(--sp-block); }
   .vid-grid { grid-template-columns: 1fr 1fr; }
   .ncd-list { grid-template-columns: 1fr; }
-  .home-does { grid-template-columns: 1fr; gap: 12px; }
   .why-strip { grid-template-columns: 1fr; }
   .support-card { flex: 1 1 100%; }
 }
@@ -609,28 +607,44 @@ footer { background: #002a48; padding: 40px 5% 24px; }
 
     <p class="home-intro">GROW – Grace Reaches On Wheels is a global health outreach initiative focused on NCDs awareness, community education, and patient support through culturally grounded, technology-enabled solutions.</p>
 
-    <div class="home-actions">
-      <a href="#about" class="btn-primary">
-        Explore Our Work
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-
     <div class="home-does">
-      <div class="does-card">
-        <div class="does-icon" aria-hidden="true">📚</div>
-        <div class="does-title">Health Education</div>
-        <p class="does-desc">Animated videos and prevention guidance in Swahili and English. <a href="#programs">See our programs →</a></p>
+      <h2 class="serif serif-white does-heading" id="does-title">Explore Our Work</h2>
+
+      <div class="about-tabs" role="tablist" aria-label="Explore Our Work">
+        <button type="button" class="about-tab" id="does-tab-education" role="tab" aria-selected="false" aria-controls="does-panel-education">
+          <span class="label">Health Education</span>
+        </button>
+        <button type="button" class="about-tab" id="does-tab-outreach" role="tab" aria-selected="false" aria-controls="does-panel-outreach">
+          <span class="label">Community Outreach</span>
+        </button>
+        <button type="button" class="about-tab" id="does-tab-mobile" role="tab" aria-selected="false" aria-controls="does-panel-mobile">
+          <span class="label">Mobile Health</span>
+        </button>
       </div>
-      <div class="does-card">
-        <div class="does-icon" aria-hidden="true">🤝</div>
-        <div class="does-title">Community Outreach</div>
-        <p class="does-desc">In-person sessions taking NCDs awareness into schools and neighbourhoods. <a href="#events">Upcoming events →</a></p>
+
+      <div class="collapse does-panel" id="does-panel-education" data-open="false" aria-hidden="true" role="tabpanel" aria-labelledby="does-tab-education">
+        <div class="collapse-inner">
+          <div class="does-card">
+            <div class="does-icon" aria-hidden="true">📚</div>
+            <p class="does-desc">Animated videos and prevention guidance in Swahili and English. <a href="#programs">See our programs →</a></p>
+          </div>
+        </div>
       </div>
-      <div class="does-card">
-        <div class="does-icon" aria-hidden="true">🚐</div>
-        <div class="does-title">Mobile Health</div>
-        <p class="does-desc">Mobile clinics and pharmacy services, funding our work long term. <span class="does-soon">Coming soon</span></p>
+      <div class="collapse does-panel" id="does-panel-outreach" data-open="false" aria-hidden="true" role="tabpanel" aria-labelledby="does-tab-outreach">
+        <div class="collapse-inner">
+          <div class="does-card">
+            <div class="does-icon" aria-hidden="true">🤝</div>
+            <p class="does-desc">In-person sessions taking NCDs awareness into schools and neighbourhoods. <a href="#events">Upcoming events →</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="collapse does-panel" id="does-panel-mobile" data-open="false" aria-hidden="true" role="tabpanel" aria-labelledby="does-tab-mobile">
+        <div class="collapse-inner">
+          <div class="does-card">
+            <div class="does-icon" aria-hidden="true">🚐</div>
+            <p class="does-desc">Mobile clinics and pharmacy services, funding our work long term. <span class="does-soon">Coming soon</span></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1358,6 +1372,51 @@ footer { background: #002a48; padding: 40px 5% 24px; }
   initToggleSection('footer-nav-toggle', 'footer-nav-panel');
   initToggleSection('footer-programs-toggle', 'footer-programs-panel');
   initToggleSection('footer-connect-toggle', 'footer-connect-panel');
+
+  // ── EXPLORE OUR WORK TABS ──
+  // Same one-open-at-a-time tab group as About: opening a tab closes any
+  // other open one; clicking the open tab again closes it; arrow keys move
+  // focus between tabs the way the About tablist does.
+  (function () {
+    var tabs = document.querySelector('#home .about-tabs');
+    if (!tabs) return;
+    var triggers = Array.prototype.slice.call(tabs.querySelectorAll('[role="tab"]'));
+
+    function setOpen(panelId, open) {
+      triggers.forEach(function (t) {
+        var id = t.getAttribute('aria-controls');
+        var panel = document.getElementById(id);
+        var selected = open && id === panelId;
+        panel.setAttribute('data-open', String(selected));
+        panel.setAttribute('aria-hidden', String(!selected));
+        t.setAttribute('aria-selected', String(selected));
+        if (selected) {
+          Array.prototype.forEach.call(panel.querySelectorAll('.reveal'), function (el) {
+            el.classList.add('visible');
+          });
+        }
+      });
+    }
+
+    triggers.forEach(function (t) {
+      t.addEventListener('click', function () {
+        var panelId = t.getAttribute('aria-controls');
+        var alreadyOpen = document.getElementById(panelId).getAttribute('data-open') === 'true';
+        setOpen(panelId, !alreadyOpen);
+      });
+      t.addEventListener('keydown', function (e) {
+        var index = triggers.indexOf(t);
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') index = (index + 1) % triggers.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') index = (index - 1 + triggers.length) % triggers.length;
+        else if (e.key !== 'Home' && e.key !== 'End') return;
+        if (e.key === 'Home') index = 0;
+        if (e.key === 'End') index = triggers.length - 1;
+        e.preventDefault();
+        triggers[index].focus();
+        setOpen(triggers[index].getAttribute('aria-controls'), true);
+      });
+    });
+  })();
 
   // ── ACTIVE NAV STATE ──
   var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
