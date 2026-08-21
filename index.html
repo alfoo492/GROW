@@ -416,22 +416,27 @@ header {
 .team-bg .sec-head { text-align: center; margin: 0 auto 12px; }
 .team-bg .tab-toggle { margin-left: 0; margin-right: 0; }
 /* Six cards (5 people + the join card) split evenly into two rows of 3. */
-.team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: var(--sp-block); }
+/* All 5 board members in one row on desktop — the join card wraps onto
+   its own line below rather than squeezing into a 6th column. Cards
+   themselves are shrunk (smaller photo/avatar, tighter type) to fit. */
+.team-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; margin-top: var(--sp-block); }
 .team-card { background: var(--white); border: 1px solid #e4e9f0; border-radius: var(--radius); overflow: hidden; transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease); }
 .team-card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(0,58,99,0.1); }
-.team-photo-placeholder { height: 128px; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; }
-.team-avatar { width: 62px; height: 62px; border-radius: 50%; background: var(--blue-mid); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; }
-.team-info { padding: 20px 22px 24px; text-align: center; }
-.team-name { font-size: 16px; font-weight: 600; color: var(--text-dark); margin-bottom: 3px; }
-.team-role { font-size: 12px; color: var(--accent); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
-.team-bio { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
-.team-socials { display: flex; gap: 8px; justify-content: center; }
-.team-social-link { width: 32px; height: 32px; border-radius: 8px; border: 1px solid #e0e6ef; display: flex; align-items: center; justify-content: center; transition: background 0.2s, border-color 0.2s; }
-.team-social-link svg { width: 15px; height: 15px; fill: var(--blue-mid); }
+.team-photo-placeholder { height: 84px; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; }
+.team-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--blue-mid); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; }
+.team-info { padding: 14px 14px 18px; text-align: center; }
+.team-name { font-size: 13.5px; font-weight: 600; color: var(--text-dark); margin-bottom: 2px; }
+.team-role { font-size: 10px; color: var(--accent); font-weight: 600; letter-spacing: 0.3px; text-transform: uppercase; margin-bottom: 8px; }
+.team-bio { font-size: 11.5px; color: var(--text-muted); line-height: 1.55; margin-bottom: 12px; }
+.team-socials { display: flex; gap: 6px; justify-content: center; }
+.team-social-link { width: 26px; height: 26px; border-radius: 7px; border: 1px solid #e0e6ef; display: flex; align-items: center; justify-content: center; transition: background 0.2s, border-color 0.2s; }
+.team-social-link svg { width: 12px; height: 12px; fill: var(--blue-mid); }
 .team-social-link:hover { background: var(--blue-pale); border-color: var(--blue-light); }
-.team-join { background: var(--blue-dark); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 26px 24px; }
+/* Spans the full row — with 5 board members already filling row one, a
+   6th grid cell would leave the join card alone beside four empty ones. */
+.team-join { grid-column: 1 / -1; background: var(--blue-dark); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 26px 24px; }
 .team-join h3 { font-family: 'Fraunces', serif; font-size: 21px; font-weight: 400; color: var(--white); margin-bottom: 10px; }
-.team-join p { font-size: 13.5px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 18px; }
+.team-join p { font-size: 13.5px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 18px; max-width: 460px; margin-left: auto; margin-right: auto; }
 .team-join-btn { background: var(--accent); color: var(--white); font-size: 13px; font-weight: 600; padding: 11px 22px; border-radius: 100px; align-self: center; transition: background 0.2s; }
 .team-join-btn:hover { background: var(--accent-dark); }
 
