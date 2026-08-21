@@ -225,13 +225,13 @@ header {
 
 /* ── ABOUT ── */
 .about-bg { background: var(--white); }
-.about-bg .wrap { padding-bottom: 12px; }
+.about-bg .wrap { padding-bottom: 0; }
 
 /* ── WHY THIS WORK MATTERS ── */
 .why-bg { background: var(--white); }
 /* Same white as About above it, so full section padding on both reads as
    one big gap — trim both sides of it and centre the heading. */
-.why-bg .wrap { padding-top: 8px; }
+.why-bg .wrap { padding-top: 0; }
 .why-bg .sec-head { text-align: center; margin: 0 auto 12px; }
 .about-tabs {
   display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #dbe7f2;
@@ -248,7 +248,7 @@ header {
   background: var(--accent); border-radius: 3px 3px 0 0; transform: scaleX(0);
   transition: transform 0.32s var(--ease);
 }
-.about-tab .label { margin: 0; color: inherit; transition: color 0.25s var(--ease); }
+.about-tab .label { margin: 0; color: inherit; font-weight: 700; transition: color 0.25s var(--ease); }
 .about-tab:hover, .about-tab[aria-selected="true"] { color: var(--blue-mid); }
 .about-tab[aria-selected="true"]::after { transform: scaleX(1); }
 .about-intro { margin-bottom: 0; text-align: center; }
