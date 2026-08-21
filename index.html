@@ -348,14 +348,25 @@ header {
 .vid-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: var(--sp-block); }
 .vid-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); overflow: hidden; transition: transform 0.25s var(--ease), background 0.25s var(--ease); }
 .vid-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.1); }
-/* A custom square thumbnail rather than Instagram's own embed widget —
-   keeps the card's rectangle shape consistent and doesn't drag in likes/
-   captions/profile chrome, just a play affordance linking out to the reel. */
-.vid-thumb { position: relative; display: block; aspect-ratio: 1 / 1; overflow: hidden; }
-.vid-thumb-bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.5; transition: transform 0.5s var(--ease); }
-.vid-card:hover .vid-thumb-bg { transform: scale(1.06); }
-.vid-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.vid-play svg { width: 20px; height: 20px; fill: var(--white); margin-left: 3px; }
+/* Instagram's own embed.js renders the real player + caption/likes/profile
+   chrome inline here — plays without leaving the site. Capped to the card
+   width and clipped by .vid-card's own overflow:hidden/border-radius so it
+   stays inside the card shape; it's still taller than a flat thumbnail
+   would be, since Reels are vertical video, Instagram's own aspect ratio.
+   Before the script loads (or if it's blocked), the blockquote's own
+   fallback link — styled below — reads as a compact "Watch on Instagram"
+   pill instead of a raw URL. */
+.vid-embed { overflow: hidden; }
+.vid-embed blockquote.instagram-media { margin: 0 auto !important; max-width: 100% !important; min-width: 0 !important; width: 100% !important; }
+.vid-embed iframe { max-width: 100% !important; }
+.vid-embed blockquote:not(.instagram-media-rendered) {
+  display: flex; align-items: center; justify-content: center; min-height: 150px;
+  background: rgba(255,255,255,0.04);
+}
+.vid-embed blockquote:not(.instagram-media-rendered) a {
+  color: var(--white); font-size: 13px; font-weight: 600; text-decoration: none;
+  background: var(--accent); padding: 9px 18px; border-radius: 100px;
+}
 .vid-body { padding: 20px 22px 24px; }
 .vid-body h3 { font-size: 16.5px; font-weight: 600; color: var(--white); margin-bottom: 7px; }
 .vid-body p { font-size: 13.5px; color: rgba(255,255,255,0.55); line-height: 1.65; }
@@ -788,30 +799,33 @@ footer { background: #002a48; padding: 40px 5% 24px; }
 
     <div class="vid-grid">
       <article class="vid-card reveal">
-        <a href="https://www.instagram.com/reel/DXrmgt9hy_e/" target="_blank" rel="noopener" class="vid-thumb" aria-label="Watch Understanding NCDs on Instagram">
-          <div class="vid-thumb-bg" style="background-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=60')"></div>
-          <div class="vid-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
-        </a>
+        <div class="vid-embed">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DXrmgt9hy_e/" data-instgrm-version="14">
+            <a href="https://www.instagram.com/reel/DXrmgt9hy_e/" target="_blank" rel="noopener">Watch on Instagram</a>
+          </blockquote>
+        </div>
         <div class="vid-body">
           <h3>Understanding NCDs</h3>
           <p>What non-communicable diseases are, why they're rising, and how communities can respond.</p>
         </div>
       </article>
       <article class="vid-card reveal">
-        <a href="https://www.instagram.com/reel/Dbz9ambBDMA/" target="_blank" rel="noopener" class="vid-thumb" aria-label="Watch Prevention &amp; Lifestyle on Instagram">
-          <div class="vid-thumb-bg" style="background-image:url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=600&q=60')"></div>
-          <div class="vid-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
-        </a>
+        <div class="vid-embed">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Dbz9ambBDMA/" data-instgrm-version="14">
+            <a href="https://www.instagram.com/reel/Dbz9ambBDMA/" target="_blank" rel="noopener">Watch on Instagram</a>
+          </blockquote>
+        </div>
         <div class="vid-body">
           <h3>Prevention &amp; Lifestyle</h3>
           <p>Simple, proven ways to lower your NCDs risk — diet, activity, quitting tobacco, and regular screening.</p>
         </div>
       </article>
       <article class="vid-card reveal">
-        <a href="https://www.instagram.com/reel/DasLyOetNmE/" target="_blank" rel="noopener" class="vid-thumb" aria-label="Watch Get to Know More About GROW on Instagram">
-          <div class="vid-thumb-bg" style="background-image:url('https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=60')"></div>
-          <div class="vid-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
-        </a>
+        <div class="vid-embed">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DasLyOetNmE/" data-instgrm-version="14">
+            <a href="https://www.instagram.com/reel/DasLyOetNmE/" target="_blank" rel="noopener">Watch on Instagram</a>
+          </blockquote>
+        </div>
         <div class="vid-body">
           <h3>Get to Know More About GROW</h3>
           <p>How GROW combines education, technology, and community outreach to help people prevent and manage NCDs.</p>
@@ -1534,6 +1548,12 @@ footer { background: #002a48; padding: 40px 5% 24px; }
   });
 })();
 </script>
+
+<!-- Renders the three Instagram Reel blockquotes in the Health Education
+     Hub into their inline, playable embeds. If this fails to load (blocked,
+     offline), each blockquote's own fallback link still reads as a "Watch
+     on Instagram" pill — see .vid-embed in the styles above. -->
+<script async src="https://www.instagram.com/embed.js"></script>
 
 </body>
 </html>
