@@ -225,12 +225,13 @@ header {
 
 /* ── ABOUT ── */
 .about-bg { background: var(--white); }
+.about-bg .wrap { padding-bottom: 12px; }
 
 /* ── WHY THIS WORK MATTERS ── */
 .why-bg { background: var(--white); }
 /* Same white as About above it, so full section padding on both reads as
-   one big gap — trim just the top here and centre the heading in it. */
-.why-bg .wrap { padding-top: 20px; }
+   one big gap — trim both sides of it and centre the heading. */
+.why-bg .wrap { padding-top: 8px; }
 .why-bg .sec-head { text-align: center; margin: 0 auto 12px; }
 .about-tabs {
   display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #dbe7f2;
