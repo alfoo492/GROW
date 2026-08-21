@@ -378,22 +378,23 @@ header {
 }
 .vid-modal-close:hover { background: rgba(255,255,255,0.2); }
 .vid-modal-close svg { width: 16px; height: 16px; }
-/* Instagram's own embed.js renders the real player + caption/likes/profile
-   chrome here — plays without leaving the site, inside the modal rather
-   than a grid card, so its vertical aspect ratio has room to breathe.
-   Before the script loads (or if it's blocked), the blockquote's own
-   fallback link — styled below — reads as a compact "Watch on Instagram"
-   pill instead of a raw URL. */
-.vid-embed blockquote.instagram-media { margin: 0 auto !important; max-width: 100% !important; min-width: 0 !important; width: 100% !important; }
-.vid-embed iframe { max-width: 100% !important; }
-.vid-embed blockquote:not(.instagram-media-rendered) {
-  display: flex; align-items: center; justify-content: center; min-height: 200px;
-  background: rgba(255,255,255,0.04); border-radius: 14px;
+/* No iframe, no third-party script — a static preview image plus one
+   explicit "Watch on Instagram" link. Nothing here can play, redirect, or
+   capture a scroll/swipe gesture on its own; leaving the site only ever
+   happens on that one deliberate click. */
+.vid-preview { position: relative; aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden; }
+.vid-preview-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.vid-preview-body { padding: 16px 4px 4px; text-align: center; }
+.vid-preview-body h3 { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 400; color: var(--white); margin-bottom: 8px; }
+.vid-preview-body p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 16px; }
+.vid-preview-btn {
+  display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--white);
+  font-size: 13.5px; font-weight: 600; padding: 11px 20px; border-radius: 100px;
+  transition: background 0.2s var(--ease), transform 0.2s var(--ease);
 }
-.vid-embed blockquote:not(.instagram-media-rendered) a {
-  color: var(--white); font-size: 13px; font-weight: 600; text-decoration: none;
-  background: var(--accent); padding: 9px 18px; border-radius: 100px;
-}
+.vid-preview-btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+.vid-preview-btn svg { transition: transform 0.2s var(--ease); }
+.vid-preview-btn:hover svg { transform: translateX(3px); }
 
 .lib-head { margin-top: var(--sp-group); margin-bottom: var(--sp-block); text-align: center; }
 /* NCD library as an accordion — 6 topics x ~5 tips is too much open at once */
@@ -854,46 +855,67 @@ footer { background: #002a48; padding: 40px 5% 24px; }
       </article>
     </div>
 
-    <!-- Videos play in a modal, not inline in the grid, so the thumbnail
-         cards above stay clean squares — Instagram's own vertical-video
-         aspect ratio and caption/likes chrome never has to fit inside a
-         grid card. -->
+    <!-- Videos preview in a modal, not inline in the grid, so the thumbnail
+         cards above stay clean squares. This is a fully custom card, not
+         Instagram's iframe embed: no third-party script runs on the page,
+         so nothing here can auto-redirect on a stray tap, hijack scroll or
+         swipe gestures, or keep playing once you've scrolled past it —
+         watching the real Reel is always one deliberate click through
+         "Watch on Instagram", never automatic. -->
     <div class="vid-modal" id="vid-modal-1" data-open="false" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Understanding NCDs">
       <div class="vid-modal-backdrop" data-modal-close></div>
       <div class="vid-modal-panel">
-        <button type="button" class="vid-modal-close" data-modal-close aria-label="Close video">
+        <button type="button" class="vid-modal-close" data-modal-close aria-label="Close preview">
           <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
         </button>
-        <div class="vid-embed">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DXrmgt9hy_e/" data-instgrm-version="14">
-            <a href="https://www.instagram.com/reel/DXrmgt9hy_e/" target="_blank" rel="noopener">Watch on Instagram</a>
-          </blockquote>
+        <div class="vid-preview">
+          <div class="vid-preview-bg" style="background-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=70')"></div>
+        </div>
+        <div class="vid-preview-body">
+          <h3>Understanding NCDs</h3>
+          <p>What non-communicable diseases are, why they're rising, and how communities can respond.</p>
+          <a href="https://www.instagram.com/reel/DXrmgt9hy_e/" target="_blank" rel="noopener" class="vid-preview-btn">
+            Watch on Instagram
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
         </div>
       </div>
     </div>
     <div class="vid-modal" id="vid-modal-2" data-open="false" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Prevention &amp; Lifestyle">
       <div class="vid-modal-backdrop" data-modal-close></div>
       <div class="vid-modal-panel">
-        <button type="button" class="vid-modal-close" data-modal-close aria-label="Close video">
+        <button type="button" class="vid-modal-close" data-modal-close aria-label="Close preview">
           <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
         </button>
-        <div class="vid-embed">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Dbz9ambBDMA/" data-instgrm-version="14">
-            <a href="https://www.instagram.com/reel/Dbz9ambBDMA/" target="_blank" rel="noopener">Watch on Instagram</a>
-          </blockquote>
+        <div class="vid-preview">
+          <div class="vid-preview-bg" style="background-image:url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=700&q=70')"></div>
+        </div>
+        <div class="vid-preview-body">
+          <h3>Prevention &amp; Lifestyle</h3>
+          <p>Simple, proven ways to lower your NCDs risk — diet, activity, quitting tobacco, and regular screening.</p>
+          <a href="https://www.instagram.com/reel/Dbz9ambBDMA/" target="_blank" rel="noopener" class="vid-preview-btn">
+            Watch on Instagram
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
         </div>
       </div>
     </div>
     <div class="vid-modal" id="vid-modal-3" data-open="false" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Get to Know More About GROW">
       <div class="vid-modal-backdrop" data-modal-close></div>
       <div class="vid-modal-panel">
-        <button type="button" class="vid-modal-close" data-modal-close aria-label="Close video">
+        <button type="button" class="vid-modal-close" data-modal-close aria-label="Close preview">
           <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
         </button>
-        <div class="vid-embed">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DasLyOetNmE/" data-instgrm-version="14">
-            <a href="https://www.instagram.com/reel/DasLyOetNmE/" target="_blank" rel="noopener">Watch on Instagram</a>
-          </blockquote>
+        <div class="vid-preview">
+          <div class="vid-preview-bg" style="background-image:url('https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=700&q=70')"></div>
+        </div>
+        <div class="vid-preview-body">
+          <h3>Get to Know More About GROW</h3>
+          <p>How GROW combines education, technology, and community outreach to help people prevent and manage NCDs.</p>
+          <a href="https://www.instagram.com/reel/DasLyOetNmE/" target="_blank" rel="noopener" class="vid-preview-btn">
+            Watch on Instagram
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
         </div>
       </div>
     </div>
@@ -1481,10 +1503,7 @@ footer { background: #002a48; padding: 40px 5% 24px; }
   initToggleSection('footer-programs-toggle', 'footer-programs-panel');
   initToggleSection('footer-connect-toggle', 'footer-connect-panel');
 
-  // ── VIDEO MODALS (thumbnails open the Instagram embed in an overlay) ──
-  // Each blockquote is already in the DOM (just visually hidden inside its
-  // modal), so embed.js has already turned it into a real playable embed
-  // by page load — opening the modal only reveals it, nothing loads late.
+  // ── VIDEO MODALS (thumbnails open a static preview + Watch on Instagram) ──
   var openVidModal = null;
   function closeVidModal() {
     if (!openVidModal) return;
@@ -1641,12 +1660,6 @@ footer { background: #002a48; padding: 40px 5% 24px; }
   });
 })();
 </script>
-
-<!-- Renders the three Instagram Reel blockquotes in the Health Education
-     Hub into their inline, playable embeds. If this fails to load (blocked,
-     offline), each blockquote's own fallback link still reads as a "Watch
-     on Instagram" pill — see .vid-embed in the styles above. -->
-<script async src="https://www.instagram.com/embed.js"></script>
 
 </body>
 </html>
