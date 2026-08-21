@@ -1238,7 +1238,9 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
 
   collapseTriggers.forEach(function (t) {
     t.addEventListener('click', function () {
-      setCollapse(t.getAttribute('aria-controls'), true);
+      var panelId = t.getAttribute('aria-controls');
+      var alreadyOpen = document.getElementById(panelId).getAttribute('data-open') === 'true';
+      setCollapse(panelId, !alreadyOpen);
     });
     t.addEventListener('keydown', function (e) {
       var index = collapseTriggers.indexOf(t);
