@@ -203,18 +203,24 @@ header {
    below (same treatment already applied to Events/Support/Team/footer). */
 .home-does { margin-top: 28px; text-align: center; animation: fadeUp 0.7s 0.32s ease both; }
 .does-heading { margin-bottom: 16px; }
-.home .about-tabs { justify-content: center; border-bottom: none; }
+/* Tabs and panels share the same 3-column grid so whichever card opens
+   lands directly under its own tab instead of centering under the row. */
+.home .about-tabs { display: grid; grid-template-columns: repeat(3,1fr); border-bottom: none; }
 .home .about-tab { color: rgba(255,255,255,0.55); }
 .home .about-tab:hover, .home .about-tab[aria-selected="true"] { color: var(--white); }
-.does-panel .collapse-inner { padding-top: 18px; display: flex; justify-content: center; }
+.does-panels { display: grid; grid-template-columns: repeat(3,1fr); }
+.does-panel:nth-child(1) { grid-column: 1; }
+.does-panel:nth-child(2) { grid-column: 2; }
+.does-panel:nth-child(3) { grid-column: 3; }
+.does-panel .collapse-inner { padding-top: 14px; }
 .does-card {
   background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13);
-  border-radius: 16px; padding: 22px 24px; max-width: 420px; text-align: left;
+  border-radius: 12px; padding: 14px 16px; text-align: left;
 }
-.does-icon { font-size: 22px; margin-bottom: 12px; }
-.does-desc { font-size: 13.5px; color: rgba(255,255,255,0.55); line-height: 1.65; }
+.does-icon { font-size: 16px; margin-bottom: 6px; }
+.does-desc { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.55; }
 .does-card a { color: var(--accent); font-weight: 600; }
-.does-soon { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--accent); }
+.does-soon { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--accent); }
 
 @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
 
@@ -531,6 +537,11 @@ footer { background: #002a48; padding: 40px 5% 24px; }
   .about-tabs { align-items: stretch; gap: 2px; overflow-x: visible; flex-wrap: wrap; }
   .about-tab { flex: 1 1 calc(50% - 2px); padding-left: 8px; padding-right: 8px; }
   .about-tab:last-child { flex-basis: 100%; }
+  /* The Explore Our Work tabs/panels are a 3-column grid, not flex, so they
+     need their own stack-to-one-column override here. */
+  .home .about-tabs { grid-template-columns: 1fr; gap: 6px; }
+  .does-panels { grid-template-columns: 1fr; }
+  .does-panel:nth-child(2), .does-panel:nth-child(3) { grid-column: 1; }
   .about-tab::after { left: 8px; right: 8px; }
   .val-card.span2 { grid-column: span 1; }
   .team-grid { grid-template-columns: 1fr; }
@@ -622,27 +633,29 @@ footer { background: #002a48; padding: 40px 5% 24px; }
         </button>
       </div>
 
-      <div class="collapse does-panel" id="does-panel-education" data-open="false" aria-hidden="true" role="tabpanel" aria-labelledby="does-tab-education">
-        <div class="collapse-inner">
-          <div class="does-card">
-            <div class="does-icon" aria-hidden="true">📚</div>
-            <p class="does-desc">Animated videos and prevention guidance in Swahili and English. <a href="#programs">See our programs →</a></p>
+      <div class="does-panels">
+        <div class="collapse does-panel" id="does-panel-education" data-open="false" aria-hidden="true" role="tabpanel" aria-labelledby="does-tab-education">
+          <div class="collapse-inner">
+            <div class="does-card">
+              <div class="does-icon" aria-hidden="true">📚</div>
+              <p class="does-desc">Animated videos and prevention guidance in Swahili and English. <a href="#programs">See our programs →</a></p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="collapse does-panel" id="does-panel-outreach" data-open="false" aria-hidden="true" role="tabpanel" aria-labelledby="does-tab-outreach">
-        <div class="collapse-inner">
-          <div class="does-card">
-            <div class="does-icon" aria-hidden="true">🤝</div>
-            <p class="does-desc">In-person sessions taking NCDs awareness into schools and neighbourhoods. <a href="#events">Upcoming events →</a></p>
+        <div class="collapse does-panel" id="does-panel-outreach" data-open="false" aria-hidden="true" role="tabpanel" aria-labelledby="does-tab-outreach">
+          <div class="collapse-inner">
+            <div class="does-card">
+              <div class="does-icon" aria-hidden="true">🤝</div>
+              <p class="does-desc">In-person sessions taking NCDs awareness into schools and neighbourhoods. <a href="#events">Upcoming events →</a></p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="collapse does-panel" id="does-panel-mobile" data-open="false" aria-hidden="true" role="tabpanel" aria-labelledby="does-tab-mobile">
-        <div class="collapse-inner">
-          <div class="does-card">
-            <div class="does-icon" aria-hidden="true">🚐</div>
-            <p class="does-desc">Mobile clinics and pharmacy services, funding our work long term. <span class="does-soon">Coming soon</span></p>
+        <div class="collapse does-panel" id="does-panel-mobile" data-open="false" aria-hidden="true" role="tabpanel" aria-labelledby="does-tab-mobile">
+          <div class="collapse-inner">
+            <div class="does-card">
+              <div class="does-icon" aria-hidden="true">🚐</div>
+              <p class="does-desc">Mobile clinics and pharmacy services, funding our work long term. <span class="does-soon">Coming soon</span></p>
+            </div>
           </div>
         </div>
       </div>
