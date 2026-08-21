@@ -225,10 +225,9 @@ header {
 
 /* ── ABOUT ── */
 .about-bg { background: var(--white); }
-/* The shared .sec-head caps at 700px, which left a wide empty gap on the
-   right of this heading. The About title runs the full section width
-   instead, same as the announcement bar above it. */
-#about .sec-head { max-width: none; }
+
+/* ── WHY THIS WORK MATTERS ── */
+.why-bg { background: var(--white); }
 .about-tabs {
   display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #dbe7f2;
   margin-bottom: 26px; overflow-x: auto; scrollbar-width: none;
@@ -603,16 +602,8 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
 </section>
 
 <!-- ════ ABOUT ════ -->
-<section class="about-bg" id="about" aria-labelledby="about-title">
+<section class="about-bg" id="about" aria-label="About GROW">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <button type="button" class="tab-toggle" data-collapse="about-panel" aria-expanded="false" aria-controls="about-panel">
-        <span class="label">Who We Are</span>
-        <svg class="tab-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <h2 class="serif title-toggle" id="about-title" data-collapse="about-panel">Building healthier<br>communities <em>together</em></h2>
-    </div>
-
     <div class="collapse" id="about-panel" data-open="false">
       <div class="collapse-inner">
         <div class="about-grid">
@@ -680,24 +671,29 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="reveal">
-          <span class="label" style="margin-top:var(--sp-block);">Why This Work Matters</span>
-          <div class="why-strip">
-            <div class="why-card">
-              <div class="why-num">41M</div>
-              <div class="why-lbl">Deaths annually from NCDs — 74% of all global deaths (WHO, 2023)</div>
-            </div>
-            <div class="why-card">
-              <div class="why-num">77%</div>
-              <div class="why-lbl">Of NCD deaths occur in low- and middle-income countries</div>
-            </div>
-            <div class="why-card">
-              <div class="why-num">∞</div>
-              <div class="why-lbl">Lives reachable through education, community action &amp; mobile healthcare</div>
-            </div>
-          </div>
-        </div>
+<!-- ════ WHY THIS WORK MATTERS ════ -->
+<section class="why-bg" id="why" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 class="serif" id="why-title">Why This Work Matters</h2>
+    </div>
+    <div class="why-strip reveal">
+      <div class="why-card">
+        <div class="why-num">41M</div>
+        <div class="why-lbl">Deaths annually from NCDs — 74% of all global deaths (WHO, 2023)</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">77%</div>
+        <div class="why-lbl">Of NCD deaths occur in low- and middle-income countries</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">∞</div>
+        <div class="why-lbl">Lives reachable through education, community action &amp; mobile healthcare</div>
       </div>
     </div>
   </div>
@@ -1137,7 +1133,7 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
 
   // ── ABOUT TABS ──
   var about = document.getElementById('about');
-  var aboutHead = about.querySelector('.sec-head');
+  var aboutWrap = about.querySelector('.wrap');
   var aboutOuterPanel = about.querySelector('#about-panel');
   var aboutBody = aboutOuterPanel.querySelector('.collapse-inner');
   var aboutGrid = aboutBody.querySelector('.about-grid');
@@ -1145,7 +1141,6 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
   var valuesGrid = aboutGrid.querySelector('.values-grid');
   var aiUses = aboutGrid.querySelector('.ai-uses');
   var valuesToggle = aboutGrid.querySelector('.tab-toggle');
-  var whyBlock = aboutBody.lastElementChild;
   var tabs = document.createElement('div');
   tabs.className = 'about-tabs';
   tabs.setAttribute('role', 'tablist');
@@ -1192,16 +1187,14 @@ footer { background: #002a48; padding: var(--sec-pad) 5% 30px; }
     else aboutText.firstChild.remove();
   }
   whoPanel.firstElementChild.appendChild(whoContent);
-  whoPanel.firstElementChild.appendChild(whyBlock);
   valuesPanel.firstElementChild.appendChild(valuesGrid);
   aiPanel.firstElementChild.appendChild(aiUses);
   aboutBody.textContent = '';
   aboutBody.appendChild(whoPanel);
   aboutBody.appendChild(valuesPanel);
   aboutBody.appendChild(aiPanel);
-  aboutHead.querySelector('.tab-toggle').remove();
   valuesToggle.remove();
-  aboutHead.parentNode.insertBefore(tabs, aboutHead);
+  aboutWrap.insertBefore(tabs, aboutOuterPanel);
   // The tab panels now own their own open/closed state; the wrapper that
   // used to gate all of #about-panel just needs to stay expanded so it
   // doesn't hide them behind its own collapsed grid-template-rows/opacity.
