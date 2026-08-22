@@ -414,41 +414,109 @@ header {
 .ncd-tips li { font-size: 13px; color: rgba(255,255,255,0.66); line-height: 1.6; display: flex; align-items: flex-start; gap: 10px; }
 .ncd-tips li::before { content: ''; flex-shrink: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); margin-top: 7px; }
 
-/* ── EVENTS ── */
-.event-bg { background: var(--navy); }
-/* Compact by default like the About tabs — trimmed top/bottom padding since
-   the collapsed state is now just the toggle + heading, not the full card.
-   Bottom trimmed further still: Support right below shares the same navy,
-   so a full gap on both sides would read as one big blank band. */
-.event-bg .wrap { padding-top: 32px; padding-bottom: 8px; }
-.event-bg .sec-head { text-align: center; margin: 0 auto 12px; }
-/* .tab-toggle's -11px left margin nudges it back under left-aligned body
-   text; centred here, that same offset would read as off-centre. */
-.event-bg .tab-toggle { margin-left: 0; margin-right: 0; }
-/* .tab-chev defaults to a dark blue stroke tuned for the white About
-   background — on navy that's nearly invisible. Match .ncd-chev's dark-
-   section treatment: soft white by default, accent when open. */
-.event-bg .tab-chev { stroke: rgba(255,255,255,0.5); }
-.event-bg .tab-toggle[aria-expanded="true"] .tab-chev { stroke: var(--accent); }
-/* .tab-toggle's hover was tuned for the white About background — a pale
-   blue fill reads as an odd bright patch on navy, so match the translucent
-   white hover already used by every other dark-section control (vid-card,
-   ncd-item, event-card). */
+/* ── OUTREACH GALLERY ── */
+.outreach-bg { background: var(--navy); }
+.outreach-bg .wrap { padding-top: 32px; padding-bottom: 8px; }
+.outreach-bg .sec-head { text-align: center; margin: 0 auto var(--sp-group); max-width: 620px; }
+.outreach-bg .tab-toggle { margin-left: 0; margin-right: 0; }
+.outreach-bg .tab-chev { stroke: rgba(255,255,255,0.5); }
+.outreach-bg .tab-toggle[aria-expanded="true"] .tab-chev { stroke: var(--accent); }
 @media (hover: hover) {
-  .event-bg .tab-toggle:hover { background: rgba(255,255,255,0.08); }
-  .event-bg .tab-toggle:hover .label { color: var(--white); }
-  .event-bg .tab-toggle:hover .tab-chev { stroke: var(--accent); }
+  .outreach-bg .tab-toggle:hover { background: rgba(255,255,255,0.08); }
+  .outreach-bg .tab-toggle:hover .label { color: var(--white); }
+  .outreach-bg .tab-toggle:hover .tab-chev { stroke: var(--accent); }
 }
-.event-inner { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-group); align-items: center; margin-top: var(--sp-block); }
-/* Keeps its prominence — navy band, accent chip, 24px serif heading — but the
-   card's internals are tighter so the section stays well inside one viewport. */
-.event-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px 22px; }
-.date-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); border-radius: 100px; padding: 6px 14px; font-size: 12px; font-weight: 600; color: var(--white); margin-bottom: 12px; }
-.event-card h3 { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 400; color: var(--white); margin-bottom: 6px; line-height: 1.3; }
-.event-card > p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 10px; }
-.event-agenda { margin-bottom: 14px; display: flex; flex-direction: column; gap: 5px; }
-.event-agenda li { font-size: 12.5px; color: rgba(255,255,255,0.65); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
-.event-agenda li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+.outreach-sub { margin: 10px auto 0; }
+
+/* Horizontal snap-scroll carousel: native overflow-x + scroll-snap handles
+   swipe / drag / trackpad scrolling with zero JS. JS only layers on the
+   arrows, the progress readout, active-slide scaling + captions, and the
+   lightbox — so the gallery still works (just without the polish) if JS
+   fails to load. */
+.outreach-gallery { position: relative; --slide-w: min(680px, 74vw); }
+.outreach-track {
+  display: flex; align-items: stretch; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 4px calc((100% - var(--slide-w)) / 2) 30px;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab;
+}
+.outreach-track::-webkit-scrollbar { display: none; }
+.outreach-track.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+.outreach-slide {
+  scroll-snap-align: center; flex: 0 0 auto; width: var(--slide-w);
+  opacity: 0.4; transform: scale(0.92); transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+}
+.outreach-slide.is-active { opacity: 1; transform: scale(1); }
+
+.outreach-photo { position: relative; border-radius: var(--radius); overflow: hidden; background: rgba(255,255,255,0.05); }
+.outreach-photo-btn { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.outreach-photo img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: 50% 38%; display: block; }
+.outreach-caption {
+  position: absolute; left: 16px; bottom: 16px; max-width: calc(100% - 32px);
+  background: rgba(0,20,35,0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  color: var(--white); font-size: 12.5px; font-weight: 600; letter-spacing: 0.4px;
+  padding: 9px 16px; border-radius: 100px; width: fit-content;
+  opacity: 0; transform: translateY(10px); transition: opacity 0.4s var(--ease) 0.1s, transform 0.4s var(--ease) 0.1s;
+}
+.outreach-slide.is-active .outreach-caption { opacity: 1; transform: translateY(0); }
+
+.outreach-quote {
+  aspect-ratio: 3 / 2; border-radius: var(--radius); background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12); padding: 36px 34px; display: flex; flex-direction: column; justify-content: center;
+}
+.outreach-quote-mark { width: 30px; height: 30px; fill: var(--accent); opacity: 0.55; margin-bottom: 14px; }
+.outreach-quote p { font-family: 'Fraunces', serif; font-weight: 300; font-style: italic; font-size: clamp(16px,1.7vw,20px); color: var(--white); line-height: 1.6; margin-bottom: 18px; }
+.outreach-quote footer { display: flex; flex-direction: column; gap: 2px; }
+.outreach-quote cite { font-style: normal; font-weight: 600; font-size: 13px; color: var(--accent); }
+.outreach-quote footer span { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+.outreach-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); color: var(--white);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  opacity: 0.7; transition: opacity 0.2s var(--ease), background 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.outreach-nav svg { width: 18px; height: 18px; }
+.outreach-nav:disabled { opacity: 0.15; cursor: default; }
+.outreach-prev { left: 2px; }
+.outreach-next { right: 2px; }
+@media (hover: hover) {
+  .outreach-nav { opacity: 0; }
+  .outreach-gallery:hover .outreach-nav:not(:disabled) { opacity: 0.85; }
+  .outreach-nav:not(:disabled):hover { background: rgba(255,255,255,0.22); transform: translateY(-50%) scale(1.06); }
+}
+@media (hover: none) {
+  .outreach-nav:not(:disabled) { opacity: 0.85; }
+}
+.outreach-progress { text-align: center; margin-top: 14px; font-size: 12px; letter-spacing: 2px; font-weight: 600; color: rgba(255,255,255,0.45); }
+
+.outreach-close { text-align: center; max-width: 620px; margin: var(--sp-group) auto 0; }
+.outreach-close > p { color: rgba(255,255,255,0.6); font-size: 14.5px; line-height: 1.75; margin: 10px 0 26px; }
+.outreach-cta { margin-bottom: 24px; }
+.outreach-join-lead { font-size: 12.5px; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+.outreach-join-form { max-width: 460px; margin: 0 auto; }
+
+/* ── OUTREACH LIGHTBOX ── */
+.outreach-lightbox {
+  position: fixed; inset: 0; z-index: 500; display: flex; align-items: center; justify-content: center; padding: 24px;
+  visibility: hidden; opacity: 0; transition: opacity 0.25s var(--ease), visibility 0s linear 0.25s;
+}
+.outreach-lightbox[data-open="true"] { visibility: visible; opacity: 1; transition: opacity 0.25s var(--ease); }
+.outreach-lightbox-backdrop { position: absolute; inset: 0; background: rgba(0,15,28,0.92); }
+.outreach-lightbox-figure { position: relative; z-index: 1; max-width: min(1100px, 92vw); text-align: center; }
+.outreach-lightbox-figure img { max-width: 100%; max-height: 80vh; border-radius: 14px; display: block; margin: 0 auto; }
+.outreach-lightbox-figure figcaption { color: rgba(255,255,255,0.7); font-size: 13.5px; margin-top: 14px; min-height: 1em; }
+.outreach-lightbox-close, .outreach-lightbox-nav {
+  position: absolute; z-index: 2; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
+  color: var(--white); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s;
+}
+.outreach-lightbox-close:hover, .outreach-lightbox-nav:hover { background: rgba(255,255,255,0.22); }
+.outreach-lightbox-close { top: 18px; right: 18px; width: 40px; height: 40px; }
+.outreach-lightbox-close svg { width: 16px; height: 16px; }
+.outreach-lightbox-nav { top: 50%; transform: translateY(-50%); width: 50px; height: 50px; }
+.outreach-lightbox-nav svg { width: 20px; height: 20px; }
+.outreach-lightbox-prev { left: 14px; }
+.outreach-lightbox-next { right: 14px; }
+.outreach-lightbox-count { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); z-index: 2; color: rgba(255,255,255,0.5); font-size: 12px; letter-spacing: 2px; }
 
 .inline-form { display: flex; gap: 10px; flex-wrap: wrap; }
 .inline-form input {
@@ -572,7 +640,7 @@ footer { background: #002a48; padding: 28px 5% 18px; }
 }
 @media (max-width: 960px) {
   .about-grid { grid-template-columns: 1fr; gap: var(--sp-block); }
-  .event-inner { grid-template-columns: 1fr; gap: var(--sp-block); }
+  .outreach-gallery { --slide-w: min(560px, 82vw); }
   .vid-grid { grid-template-columns: 1fr 1fr; }
   .ncd-list { grid-template-columns: 1fr; }
   .why-strip { grid-template-columns: 1fr; }
@@ -604,6 +672,12 @@ footer { background: #002a48; padding: 28px 5% 18px; }
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
   .inline-form { flex-direction: column; }
   .inline-form input, .inline-form button { width: 100%; }
+  .outreach-gallery { --slide-w: 86vw; }
+  .outreach-track { gap: 14px; padding-bottom: 22px; }
+  .outreach-nav { width: 38px; height: 38px; }
+  .outreach-lightbox-nav { width: 42px; height: 42px; }
+  .outreach-lightbox-prev { left: 8px; }
+  .outreach-lightbox-next { right: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -632,7 +706,7 @@ footer { background: #002a48; padding: 28px 5% 18px; }
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#programs">Programs</a></li>
-      <li><a href="#events">Events</a></li>
+      <li><a href="#events">Outreach</a></li>
       <li><a href="#team">Team</a></li>
     </ul>
 
@@ -650,7 +724,7 @@ footer { background: #002a48; padding: 28px 5% 18px; }
     <li><a href="#home">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#programs">Programs</a></li>
-    <li><a href="#events">Events</a></li>
+    <li><a href="#events">Outreach</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#support" class="drawer-cta">Support Us</a></li>
   </ul>
@@ -702,7 +776,7 @@ footer { background: #002a48; padding: 28px 5% 18px; }
           <div class="collapse-inner">
             <div class="does-card">
               <div class="does-icon" aria-hidden="true">🤝</div>
-              <p class="does-desc">In-person sessions taking NCDs awareness into schools and neighbourhoods. <a href="#events">Upcoming events →</a></p>
+              <p class="does-desc">In-person sessions taking NCDs awareness into schools and neighbourhoods. <a href="#events">See GROW in action →</a></p>
             </div>
           </div>
         </div>
@@ -1039,46 +1113,282 @@ footer { background: #002a48; padding: 28px 5% 18px; }
   </div>
 </section>
 
-<!-- ════ EVENTS ════ -->
-<section class="event-bg" id="events" aria-labelledby="events-title">
+<!-- ════ OUTREACH GALLERY ════ -->
+<section class="outreach-bg" id="events" aria-labelledby="events-title">
   <div class="wrap">
     <div class="sec-head reveal">
       <button type="button" class="tab-toggle" id="events-toggle" aria-expanded="false" aria-controls="events-panel">
-        <span class="label label-light">Upcoming Event</span>
+        <span class="label label-light">Outreach Highlights</span>
         <svg class="tab-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
-      <h2 class="serif serif-white" id="events-title">Taking NCDs education<br><em>into schools</em></h2>
+      <h2 class="serif serif-white" id="events-title">GROW <em>in Action</em></h2>
+      <p class="lede lede-light outreach-sub">Real people. Real communities. Real impact. Explore moments from our outreach and hear directly from the people we serve.</p>
     </div>
 
     <div class="collapse" id="events-panel" data-open="false" aria-hidden="true">
       <div class="collapse-inner">
-        <div class="event-inner">
-          <div class="reveal">
-            <p class="lede lede-light" style="max-width:640px;">Our Educators Team is heading to Mnazi Mmoja Primary School to talk with students about non-communicable diseases — what they are, how they take hold, and the everyday habits that keep them at bay. Reaching people early is how prevention becomes second nature.</p>
+
+        <div class="outreach-gallery reveal">
+          <div class="outreach-track" id="outreach-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="GROW outreach photo gallery, 30 photos">
+          <figure class="outreach-slide outreach-photo" data-index="0">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: Health Education Outreach">
+              <img src="outreach/outreach-01.jpg" alt="A GROW educator speaks to students gathered under the trees at Jangwani Secondary School" loading="lazy">
+            </button>
+            <figcaption class="outreach-caption">Health Education Outreach</figcaption>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="1">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 2 of 30">
+              <img src="outreach/outreach-02.jpg" alt="A student smiles while taking notes during the outreach session" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="2">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 3 of 30">
+              <img src="outreach/outreach-03.jpg" alt="A GROW team member speaks with students seated in the schoolyard" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="3">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 4 of 30">
+              <img src="outreach/outreach-04.jpg" alt="A student stands to share her thoughts in front of her classmates" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="4">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 5 of 30">
+              <img src="outreach/outreach-05.jpg" alt="Students lean in, reaching and pointing with excitement during the session" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="5">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 6 of 30">
+              <img src="outreach/outreach-06.jpg" alt="A large group of students gathered outdoors for the outreach session" loading="lazy">
+            </button>
+          </figure>
+
+          <blockquote class="outreach-slide outreach-quote">
+            <svg class="outreach-quote-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11c0-2.8 2-5 5-6l1 2c-2 1-3 2.2-3 4h3v6H7v-6zm9 0c0-2.8 2-5 5-6l1 2c-2 1-3 2.2-3 4h3v6h-6v-6z"/></svg>
+            <p>“The outreach helped me understand things about my health that I had never learned before.”</p>
+            <footer><cite>Student</cite><span>Jangwani Secondary School</span></footer>
+          </blockquote>
+
+          <figure class="outreach-slide outreach-photo" data-index="6">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 7 of 30">
+              <img src="outreach/outreach-07.jpg" alt="A GROW educator addresses students seated around him" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="7">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 8 of 30">
+              <img src="outreach/outreach-08.jpg" alt="Students lean in and gesture during an open conversation" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="8">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 9 of 30">
+              <img src="outreach/outreach-09.jpg" alt="A GROW educator speaks with students gathered close by, including a student using a wheelchair" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="9">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: Connecting With Students">
+              <img src="outreach/outreach-10.jpg" alt="A student stands to respond to a GROW educator during the discussion" loading="lazy">
+            </button>
+            <figcaption class="outreach-caption">Connecting With Students</figcaption>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="10">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 11 of 30">
+              <img src="outreach/outreach-11.jpg" alt="A GROW team member listens closely during the outreach session" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="11">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 12 of 30">
+              <img src="outreach/outreach-12.jpg" alt="GROW team members hand out materials to students" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="12">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 13 of 30">
+              <img src="outreach/outreach-13.jpg" alt="GROW team members gather and talk between sessions" loading="lazy">
+            </button>
+          </figure>
+
+          <blockquote class="outreach-slide outreach-quote">
+            <svg class="outreach-quote-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11c0-2.8 2-5 5-6l1 2c-2 1-3 2.2-3 4h3v6H7v-6zm9 0c0-2.8 2-5 5-6l1 2c-2 1-3 2.2-3 4h3v6h-6v-6z"/></svg>
+            <p>“I always thought these diseases only affected older people. Now I know the habits I build today matter just as much.”</p>
+            <footer><cite>Student</cite><span>Jangwani Secondary School</span></footer>
+          </blockquote>
+
+          <figure class="outreach-slide outreach-photo" data-index="13">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 14 of 30">
+              <img src="outreach/outreach-14.jpg" alt="A student carefully writes notes during the session" loading="lazy" style="object-position:50% 15%;">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="14">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 15 of 30">
+              <img src="outreach/outreach-15.jpg" alt="A student takes notes surrounded by classmates" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="15">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 16 of 30">
+              <img src="outreach/outreach-16.jpg" alt="A GROW team member photographs a moment from the outreach" loading="lazy" style="object-position:50% 18%;">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="16">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: Learning Together">
+              <img src="outreach/outreach-17.jpg" alt="A Jangwani Secondary School student writes in his notebook" loading="lazy">
+            </button>
+            <figcaption class="outreach-caption">Learning Together</figcaption>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="17">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 18 of 30">
+              <img src="outreach/outreach-18.jpg" alt="A GROW educator addresses students seated together outdoors" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="18">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 19 of 30">
+              <img src="outreach/outreach-19.jpg" alt="Students share a warm embrace during the outreach" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="19">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 20 of 30">
+              <img src="outreach/outreach-20.jpg" alt="A GROW team member shares a playful moment with a student" loading="lazy" style="object-position:50% 15%;">
+            </button>
+          </figure>
+
+          <blockquote class="outreach-slide outreach-quote">
+            <svg class="outreach-quote-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11c0-2.8 2-5 5-6l1 2c-2 1-3 2.2-3 4h3v6H7v-6zm9 0c0-2.8 2-5 5-6l1 2c-2 1-3 2.2-3 4h3v6h-6v-6z"/></svg>
+            <p>“Seeing the GROW team come to our school and speak so openly about health made the topic feel less scary and easier to talk about.”</p>
+            <footer><cite>Outreach Participant</cite></footer>
+          </blockquote>
+
+          <figure class="outreach-slide outreach-photo" data-index="20">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: Community Conversations">
+              <img src="outreach/outreach-21.jpg" alt="Students and GROW team members gather closely around a table in discussion" loading="lazy">
+            </button>
+            <figcaption class="outreach-caption">Community Conversations</figcaption>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="21">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 22 of 30">
+              <img src="outreach/outreach-22.jpg" alt="A GROW team member raises a hand as students respond during the session" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="22">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 23 of 30">
+              <img src="outreach/outreach-23.jpg" alt="A GROW team member captures a joyful moment with students nearby" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="23">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 24 of 30">
+              <img src="outreach/outreach-24.jpg" alt="A GROW team member shares an energetic moment with cheering students" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="24">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: NCD Awareness in Action">
+              <img src="outreach/outreach-25.jpg" alt="Students cheer with hands raised during the outreach" loading="lazy">
+            </button>
+            <figcaption class="outreach-caption">NCD Awareness in Action</figcaption>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="25">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: Building Healthier Communities">
+              <img src="outreach/outreach-26.jpg" alt="Students and the GROW team gather for a group photo at Jangwani Secondary School" loading="lazy">
+            </button>
+            <figcaption class="outreach-caption">Building Healthier Communities</figcaption>
+          </figure>
+
+          <blockquote class="outreach-slide outreach-quote">
+            <svg class="outreach-quote-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11c0-2.8 2-5 5-6l1 2c-2 1-3 2.2-3 4h3v6H7v-6zm9 0c0-2.8 2-5 5-6l1 2c-2 1-3 2.2-3 4h3v6h-6v-6z"/></svg>
+            <p>“Programs like this are exactly what our communities need — clear information, delivered with warmth and patience.”</p>
+            <footer><cite>Community Member</cite></footer>
+          </blockquote>
+
+          <figure class="outreach-slide outreach-photo" data-index="26">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 27 of 30">
+              <img src="outreach/outreach-27.jpg" alt="Students and the GROW team cheer together at the close of the outreach" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="27">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 28 of 30">
+              <img src="outreach/outreach-28.jpg" alt="A GROW team member shares a lighthearted moment with a student" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="28">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 29 of 30">
+              <img src="outreach/outreach-29.jpg" alt="The GROW team poses together outside Jangwani Secondary School" loading="lazy">
+            </button>
+          </figure>
+
+          <figure class="outreach-slide outreach-photo" data-index="29">
+            <button type="button" class="outreach-photo-btn" aria-label="View larger: photo 30 of 30">
+              <img src="outreach/outreach-30.jpg" alt="The GROW team poses together after a day of outreach" loading="lazy">
+            </button>
+          </figure>
           </div>
 
-          <div class="event-card reveal">
-            <p class="date-chip">📅 &nbsp;Friday, 21st August 2026 · Mnazi Mmoja Primary School</p>
-            <h3>NCDs Education Outreach</h3>
-            <p>An in-person session led by the GROW Educators Team, bringing NCDs awareness directly to students.</p>
-            <ul class="event-agenda">
-              <li>What NCDs are — cancer, diabetes, heart and respiratory disease</li>
-              <li>How everyday habits shape long-term risk</li>
-              <li>Recognising early warning signs and when to seek care</li>
-              <li>Open discussion and Q&amp;A with the GROW Educators Team</li>
-            </ul>
-            <form class="inline-form" id="volunteer-form" novalidate>
-              <label class="visually-hidden" for="volunteer-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Your email address</label>
-              <input type="email" id="volunteer-email" name="email" placeholder="Your email to join the outreach team" required>
-              <button type="submit" id="volunteer-btn">Sign Up</button>
-            </form>
-            <p class="form-note" id="volunteer-note" role="status"></p>
-          </div>
+          <button type="button" class="outreach-nav outreach-prev" aria-label="Previous">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
+          </button>
+          <button type="button" class="outreach-nav outreach-next" aria-label="Next">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+
+          <p class="outreach-progress" id="outreach-progress-text" aria-live="polite">01 / 30</p>
         </div>
+
+        <div class="outreach-close reveal">
+          <h3 class="serif-sm">This is only <em>the beginning.</em></h3>
+          <p>Every conversation, outreach session, and shared experience brings us closer to healthier and more informed communities.</p>
+          <div class="outreach-cta">
+            <a href="#programs" class="team-join-btn">Explore Our Work →</a>
+          </div>
+          <p class="outreach-join-lead">Want to be part of the next outreach?</p>
+          <form class="inline-form outreach-join-form" id="volunteer-form" novalidate>
+            <label class="visually-hidden" for="volunteer-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Your email address</label>
+            <input type="email" id="volunteer-email" name="email" placeholder="Your email to join the outreach team" required>
+            <button type="submit" id="volunteer-btn">Join the Movement</button>
+          </form>
+          <p class="form-note" id="volunteer-note" role="status"></p>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
+
+<div class="outreach-lightbox" id="outreach-lightbox" data-open="false" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Outreach photo viewer">
+  <div class="outreach-lightbox-backdrop" data-lightbox-close></div>
+  <button type="button" class="outreach-lightbox-close" data-lightbox-close aria-label="Close photo viewer">
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+  </button>
+  <button type="button" class="outreach-lightbox-nav outreach-lightbox-prev" aria-label="Previous photo">
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
+  </button>
+  <button type="button" class="outreach-lightbox-nav outreach-lightbox-next" aria-label="Next photo">
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+  </button>
+  <figure class="outreach-lightbox-figure">
+    <img id="outreach-lightbox-img" src="" alt="">
+    <figcaption id="outreach-lightbox-caption"></figcaption>
+  </figure>
+  <p class="outreach-lightbox-count" id="outreach-lightbox-count"></p>
+</div>
+
 
 <!-- ════ SUPPORT ════ -->
 <section class="support-bg" id="support" aria-labelledby="support-title">
@@ -1240,7 +1550,7 @@ footer { background: #002a48; padding: 28px 5% 18px; }
             <ul>
               <li><a href="#about">About Us</a></li>
               <li><a href="#programs">Education Hub</a></li>
-              <li><a href="#events">Upcoming Event</a></li>
+              <li><a href="#events">Outreach Highlights</a></li>
               <li><a href="#team">Our Team</a></li>
             </ul>
           </div>
@@ -1647,6 +1957,143 @@ footer { background: #002a48; padding: 28px 5% 18px; }
     donePlaceholder: 'Thank you!',
     noteText: 'We’ll email you when donations open.'
   });
+
+  // ── OUTREACH GALLERY (carousel + lightbox) ──
+  // The track scrolls and snaps natively via CSS (overflow-x + scroll-snap),
+  // so swipe/drag/trackpad-scroll all work with no JS at all. This just
+  // layers on the arrows, the "NN / 30" readout, the active-slide scale +
+  // caption reveal, and a click-to-expand lightbox.
+  (function () {
+    var track = document.getElementById('outreach-track');
+    if (!track) return;
+    var slides = Array.prototype.slice.call(track.querySelectorAll('.outreach-slide'));
+    var photoSlides = Array.prototype.slice.call(track.querySelectorAll('.outreach-photo'));
+    var totalPhotos = photoSlides.length;
+    var prevBtn = document.querySelector('.outreach-prev');
+    var nextBtn = document.querySelector('.outreach-next');
+    var progressText = document.getElementById('outreach-progress-text');
+
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+    function nearestSlideIndex() {
+      var center = track.scrollLeft + track.clientWidth / 2;
+      var best = 0, bestDist = Infinity;
+      slides.forEach(function (s, i) {
+        var mid = s.offsetLeft + s.offsetWidth / 2;
+        var d = Math.abs(mid - center);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      return best;
+    }
+
+    function goTo(index) {
+      index = Math.max(0, Math.min(slides.length - 1, index));
+      slides[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
+    function updateActive() {
+      var idx = nearestSlideIndex();
+      slides.forEach(function (s, i) { s.classList.toggle('is-active', i === idx); });
+      if (progressText) {
+        var photoIndex = photoSlides.indexOf(slides[idx]);
+        progressText.textContent = photoIndex > -1
+          ? pad(photoIndex + 1) + ' / ' + pad(totalPhotos)
+          : 'Community Voices';
+      }
+      if (prevBtn) prevBtn.disabled = idx === 0;
+      if (nextBtn) nextBtn.disabled = idx === slides.length - 1;
+    }
+
+    var scrollTimeout;
+    track.addEventListener('scroll', function () {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(updateActive, 90);
+    }, { passive: true });
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(nearestSlideIndex() - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(nearestSlideIndex() + 1); });
+
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(nearestSlideIndex() + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(nearestSlideIndex() - 1); }
+    });
+
+    // Mouse-drag scroll for desktop users on a mouse rather than a trackpad
+    // (trackpad/touch horizontal scroll already works natively).
+    var isDown = false, startX = 0, startScroll = 0, dragged = false;
+    track.addEventListener('mousedown', function (e) {
+      isDown = true; dragged = false; startX = e.pageX; startScroll = track.scrollLeft;
+      track.classList.add('is-dragging');
+    });
+    window.addEventListener('mouseup', function () {
+      isDown = false;
+      track.classList.remove('is-dragging');
+    });
+    window.addEventListener('mousemove', function (e) {
+      if (!isDown) return;
+      e.preventDefault();
+      if (Math.abs(e.pageX - startX) > 4) dragged = true;
+      track.scrollLeft = startScroll - (e.pageX - startX);
+    });
+    // A drag that moved the track shouldn't also register as a photo click.
+    track.addEventListener('click', function (e) {
+      if (dragged) { e.stopPropagation(); e.preventDefault(); dragged = false; }
+    }, true);
+
+    updateActive();
+    window.addEventListener('resize', updateActive);
+    // The gallery lives inside a collapsed panel — while collapsed it has no
+    // height but does have its real width, so measurements taken on load are
+    // valid; re-measuring on open just accounts for anything that reflowed.
+    var eventsToggle = document.getElementById('events-toggle');
+    if (eventsToggle) eventsToggle.addEventListener('click', function () { setTimeout(updateActive, 360); });
+
+    // ── LIGHTBOX ──
+    var lightbox = document.getElementById('outreach-lightbox');
+    var lbImg = document.getElementById('outreach-lightbox-img');
+    var lbCaption = document.getElementById('outreach-lightbox-caption');
+    var lbCount = document.getElementById('outreach-lightbox-count');
+    var lbIndex = 0;
+
+    function renderLightbox() {
+      var fig = photoSlides[lbIndex];
+      var img = fig.querySelector('img');
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      var cap = fig.querySelector('.outreach-caption');
+      lbCaption.textContent = cap ? cap.textContent : '';
+      lbCount.textContent = pad(lbIndex + 1) + ' / ' + pad(totalPhotos);
+    }
+    function openLightbox(i) {
+      lbIndex = i;
+      renderLightbox();
+      lightbox.setAttribute('data-open', 'true');
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+    function closeLightbox() {
+      lightbox.setAttribute('data-open', 'false');
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+    photoSlides.forEach(function (fig, i) {
+      var btn = fig.querySelector('.outreach-photo-btn');
+      if (btn) btn.addEventListener('click', function () { openLightbox(i); });
+    });
+    Array.prototype.slice.call(lightbox.querySelectorAll('[data-lightbox-close]')).forEach(function (el) {
+      el.addEventListener('click', closeLightbox);
+    });
+    lightbox.querySelector('.outreach-lightbox-prev').addEventListener('click', function () {
+      openLightbox((lbIndex - 1 + totalPhotos) % totalPhotos);
+    });
+    lightbox.querySelector('.outreach-lightbox-next').addEventListener('click', function () {
+      openLightbox((lbIndex + 1) % totalPhotos);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (lightbox.getAttribute('data-open') !== 'true') return;
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowRight') openLightbox((lbIndex + 1) % totalPhotos);
+      else if (e.key === 'ArrowLeft') openLightbox((lbIndex - 1 + totalPhotos) % totalPhotos);
+    });
+  })();
 })();
 </script>
 
