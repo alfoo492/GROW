@@ -632,10 +632,13 @@ footer { background: #002a48; padding: 28px 5% 18px; }
    that to happen without an extra click first. */
 .impact-bg { background: var(--bg); }
 .impact-bg .wrap { padding-top: 28px; }
-.impact-head { text-align: center; margin: 0 auto var(--sp-group); max-width: 640px; }
-.impact-head .lede { margin: 10px auto 0; }
+.impact-bg .sec-head { text-align: center; margin: 0 auto var(--sp-block); max-width: 640px; }
+.impact-bg .tab-toggle { margin-left: 0; margin-right: 0; }
+.impact-highlights-head { margin-top: var(--sp-group); }
 
-.impact-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+/* Six stats read cleanest as an even 3x2 grid — the two headline figures
+   (People Reached, Digital Reach) each lead their own row. */
+.impact-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
 .impact-stat {
   background: var(--white); border-radius: var(--radius); padding: 26px 22px; text-align: center;
   box-shadow: 0 1px 2px rgba(0,30,60,0.05); transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
@@ -647,17 +650,12 @@ footer { background: #002a48; padding: 28px 5% 18px; }
 .impact-num { display: block; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(24px,2.6vw,32px); color: var(--navy); line-height: 1.1; }
 .impact-label { display: block; font-size: 13px; font-weight: 600; color: var(--blue-mid); margin: 6px 0 6px; }
 .impact-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
-/* The three headline indicators get a bit more visual weight — bigger
-   number, a soft radial glow behind the icon — without changing the grid
-   so the row still lines up cleanly. */
+/* The two headline indicators get a bit more visual weight — bigger
+   number, a soft tinted card — without changing the grid so the rows
+   still line up cleanly. */
 .impact-stat--big { position: relative; background: linear-gradient(180deg, var(--blue-pale) 0%, var(--white) 62%); }
 .impact-stat--big .impact-num { font-size: clamp(30px,3.4vw,42px); color: var(--blue-mid); }
 .impact-stat--big .impact-icon { font-size: 30px; }
-.impact-infinity { display: inline-block; animation: impactPulse 3.2s ease-in-out infinite; }
-@keyframes impactPulse {
-  0%, 100% { opacity: 1; text-shadow: 0 0 0 rgba(77,163,255,0); }
-  50% { opacity: 0.72; text-shadow: 0 0 22px rgba(77,163,255,0.55); }
-}
 
 /* Journey strip: a quiet horizontal pipeline on desktop, a stacked one on
    mobile (breakpoint below). The connecting line is a single gradient bar
@@ -713,7 +711,6 @@ footer { background: #002a48; padding: 28px 5% 18px; }
 .impact-stats .impact-stat:nth-child(4) { transition-delay: 0.2s; }
 .impact-stats .impact-stat:nth-child(5) { transition-delay: 0.26s; }
 .impact-stats .impact-stat:nth-child(6) { transition-delay: 0.32s; }
-.impact-stats .impact-stat:nth-child(7) { transition-delay: 0.38s; }
 .impact-cards .impact-card:nth-child(1) { transition-delay: 0.02s; }
 .impact-cards .impact-card:nth-child(2) { transition-delay: 0.1s; }
 .impact-cards .impact-card:nth-child(3) { transition-delay: 0.18s; }
@@ -899,140 +896,146 @@ footer { background: #002a48; padding: 28px 5% 18px; }
 <!-- ════ IMPACT ════ -->
 <section class="impact-bg" id="impact" aria-labelledby="impact-title">
   <div class="wrap">
-    <div class="impact-head reveal">
-      <span class="label">Our Impact</span>
+    <div class="sec-head reveal">
+      <button type="button" class="tab-toggle" id="impact-stats-toggle" aria-expanded="false" aria-controls="impact-stats-panel">
+        <span class="label">Our Impact</span>
+        <svg class="tab-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
       <h2 class="serif" id="impact-title">Our Impact <em>So Far</em></h2>
       <p class="lede">Every conversation, every student, and every community brings us one step closer to a healthier future.</p>
     </div>
 
-    <div class="impact-stats">
-      <div class="impact-stat impact-stat--big reveal">
-        <span class="impact-icon" aria-hidden="true">👥</span>
-        <span class="impact-num"><span class="impact-num-val" data-count="1000">0</span><span class="impact-num-suf">+</span></span>
-        <span class="impact-label">People Reached</span>
-        <p class="impact-desc">People reached through physical outreach, digital campaigns, and health education.</p>
-      </div>
+    <div class="collapse" id="impact-stats-panel" data-open="false" aria-hidden="true">
+      <div class="collapse-inner">
+        <div class="impact-stats">
+          <div class="impact-stat impact-stat--big reveal">
+            <span class="impact-icon" aria-hidden="true">👥</span>
+            <span class="impact-num"><span class="impact-num-val" data-count="1000">0</span><span class="impact-num-suf">+</span></span>
+            <span class="impact-label">People Reached</span>
+            <p class="impact-desc">People reached through physical outreach, digital campaigns, and health education.</p>
+          </div>
 
-      <div class="impact-stat reveal">
-        <span class="impact-icon" aria-hidden="true">🎓</span>
-        <span class="impact-num"><span class="impact-num-val" data-count="350">0</span><span class="impact-num-suf">+</span></span>
-        <span class="impact-label">Students Engaged</span>
-        <p class="impact-desc">Students reached through school outreach and education programs.</p>
-      </div>
+          <div class="impact-stat reveal">
+            <span class="impact-icon" aria-hidden="true">🎓</span>
+            <span class="impact-num"><span class="impact-num-val" data-count="350">0</span><span class="impact-num-suf">+</span></span>
+            <span class="impact-label">Students Engaged</span>
+            <p class="impact-desc">Students reached through school outreach and education programs.</p>
+          </div>
 
-      <div class="impact-stat reveal">
-        <span class="impact-icon" aria-hidden="true">🏫</span>
-        <span class="impact-num"><span class="impact-num-val" data-count="1">0</span></span>
-        <span class="impact-label">Community &amp; School Reached</span>
-        <p class="impact-desc">Schools, communities, or institutions where GROW has successfully conducted activities.</p>
-      </div>
+          <div class="impact-stat reveal">
+            <span class="impact-icon" aria-hidden="true">🏫</span>
+            <span class="impact-num"><span class="impact-num-val" data-count="1">0</span></span>
+            <span class="impact-label">Community &amp; School Reached</span>
+            <p class="impact-desc">Schools, communities, or institutions where GROW has successfully conducted activities.</p>
+          </div>
 
-      <div class="impact-stat impact-stat--big reveal">
-        <span class="impact-icon" aria-hidden="true">❤️</span>
-        <span class="impact-num"><span class="impact-infinity" aria-label="Infinite">∞</span></span>
-        <span class="impact-label">Lives Impacted</span>
-        <p class="impact-desc">Creating a ripple effect of health awareness, knowledge, and positive change that continues beyond every outreach.</p>
-      </div>
+          <div class="impact-stat impact-stat--big reveal">
+            <span class="impact-icon" aria-hidden="true">📢</span>
+            <span class="impact-num"><span class="impact-num-val" data-count="25000">0</span><span class="impact-num-suf">+</span></span>
+            <span class="impact-label">Digital Reach</span>
+            <p class="impact-desc">People reached through social media, digital health campaigns, videos, and online education.</p>
+          </div>
 
-      <div class="impact-stat impact-stat--big reveal">
-        <span class="impact-icon" aria-hidden="true">📢</span>
-        <span class="impact-num"><span class="impact-num-val" data-count="25000">0</span><span class="impact-num-suf">+</span></span>
-        <span class="impact-label">Digital Reach</span>
-        <p class="impact-desc">People reached through social media, digital health campaigns, videos, and online education.</p>
-      </div>
+          <div class="impact-stat reveal">
+            <span class="impact-icon" aria-hidden="true">📚</span>
+            <span class="impact-num"><span class="impact-num-val" data-count="2">0</span></span>
+            <span class="impact-label">Health Education Sessions</span>
+            <p class="impact-desc">Educational sessions, presentations, workshops, or awareness activities successfully conducted.</p>
+          </div>
 
-      <div class="impact-stat reveal">
-        <span class="impact-icon" aria-hidden="true">📚</span>
-        <span class="impact-num"><span class="impact-num-val" data-count="2">0</span></span>
-        <span class="impact-label">Health Education Sessions</span>
-        <p class="impact-desc">Educational sessions, presentations, workshops, or awareness activities successfully conducted.</p>
-      </div>
+          <div class="impact-stat reveal">
+            <span class="impact-icon" aria-hidden="true">🤝</span>
+            <span class="impact-num"><span class="impact-num-val" data-count="20">0</span><span class="impact-num-suf">+</span></span>
+            <span class="impact-label">Volunteers &amp; Team Members</span>
+            <p class="impact-desc">Young people and volunteers contributing their time, skills, and passion to GROW’s mission.</p>
+          </div>
+        </div>
 
-      <div class="impact-stat reveal">
-        <span class="impact-icon" aria-hidden="true">🤝</span>
-        <span class="impact-num"><span class="impact-num-val" data-count="20">0</span><span class="impact-num-suf">+</span></span>
-        <span class="impact-label">Volunteers &amp; Team Members</span>
-        <p class="impact-desc">Young people and volunteers contributing their time, skills, and passion to GROW’s mission.</p>
+        <div class="impact-journey reveal">
+          <ol class="impact-journey-track">
+            <li class="impact-journey-step">
+              <span class="impact-journey-icon" aria-hidden="true">💻</span>
+              <span class="impact-journey-label">Digital Education</span>
+            </li>
+            <li class="impact-journey-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+            </li>
+            <li class="impact-journey-step">
+              <span class="impact-journey-icon" aria-hidden="true">🏫</span>
+              <span class="impact-journey-label">School Outreach</span>
+            </li>
+            <li class="impact-journey-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+            </li>
+            <li class="impact-journey-step">
+              <span class="impact-journey-icon" aria-hidden="true">🩺</span>
+              <span class="impact-journey-label">Health Awareness</span>
+            </li>
+            <li class="impact-journey-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+            </li>
+            <li class="impact-journey-step">
+              <span class="impact-journey-icon" aria-hidden="true">🌱</span>
+              <span class="impact-journey-label">Empowered Communities</span>
+            </li>
+          </ol>
+        </div>
       </div>
     </div>
 
-    <div class="impact-journey reveal">
-      <ol class="impact-journey-track">
-        <li class="impact-journey-step">
-          <span class="impact-journey-icon" aria-hidden="true">💻</span>
-          <span class="impact-journey-label">Digital Education</span>
-        </li>
-        <li class="impact-journey-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
-        </li>
-        <li class="impact-journey-step">
-          <span class="impact-journey-icon" aria-hidden="true">🏫</span>
-          <span class="impact-journey-label">School Outreach</span>
-        </li>
-        <li class="impact-journey-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
-        </li>
-        <li class="impact-journey-step">
-          <span class="impact-journey-icon" aria-hidden="true">🩺</span>
-          <span class="impact-journey-label">Health Awareness</span>
-        </li>
-        <li class="impact-journey-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
-        </li>
-        <li class="impact-journey-step">
-          <span class="impact-journey-icon" aria-hidden="true">🌱</span>
-          <span class="impact-journey-label">Empowered Communities</span>
-        </li>
-      </ol>
+    <div class="sec-head impact-highlights-head reveal">
+      <button type="button" class="tab-toggle" id="impact-highlights-toggle" aria-expanded="false" aria-controls="impact-highlights-panel">
+        <span class="label">Impact Highlights</span>
+        <svg class="tab-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <h3 class="serif" style="font-size:clamp(22px,2.4vw,29px);">Impact <em>Highlights</em></h3>
+      <p class="lede">Behind every number is a conversation, a question, a student, and a community taking a step toward a healthier future.</p>
     </div>
 
-    <div class="impact-highlights">
-      <div class="impact-head reveal">
-        <h3 class="serif" style="font-size:clamp(22px,2.4vw,29px);">Impact <em>Highlights</em></h3>
-        <p class="lede">Behind every number is a conversation, a question, a student, and a community taking a step toward a healthier future.</p>
-      </div>
+    <div class="collapse" id="impact-highlights-panel" data-open="false" aria-hidden="true">
+      <div class="collapse-inner">
+        <div class="impact-cards">
+          <article class="impact-card impact-card--photo reveal" data-cycle="true">
+            <div class="impact-card-bg is-active" style="background-image:url('outreach/outreach-01.jpg')"></div>
+            <div class="impact-card-bg" style="background-image:url('outreach/outreach-10.jpg')"></div>
+            <div class="impact-card-bg" style="background-image:url('outreach/outreach-21.jpg')"></div>
+            <div class="impact-card-shade"></div>
+            <div class="impact-card-dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
+            <div class="impact-card-body">
+              <span class="impact-card-icon" aria-hidden="true">🏫</span>
+              <h3>Jangwani Secondary School Outreach</h3>
+              <p>Successfully conducted an NCD education outreach at Jangwani Secondary School, engaging students in meaningful conversations about non-communicable diseases, prevention, healthy lifestyles, and early awareness.</p>
+            </div>
+          </article>
 
-      <div class="impact-cards">
-        <article class="impact-card impact-card--photo reveal" data-cycle="true">
-          <div class="impact-card-bg is-active" style="background-image:url('outreach/outreach-01.jpg')"></div>
-          <div class="impact-card-bg" style="background-image:url('outreach/outreach-10.jpg')"></div>
-          <div class="impact-card-bg" style="background-image:url('outreach/outreach-21.jpg')"></div>
-          <div class="impact-card-shade"></div>
-          <div class="impact-card-dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
-          <div class="impact-card-body">
-            <span class="impact-card-icon" aria-hidden="true">🏫</span>
-            <h3>Jangwani Secondary School Outreach</h3>
-            <p>Successfully conducted an NCD education outreach at Jangwani Secondary School, engaging students in meaningful conversations about non-communicable diseases, prevention, healthy lifestyles, and early awareness.</p>
-          </div>
-        </article>
+          <article class="impact-card reveal">
+            <div class="impact-card-gradient"></div>
+            <div class="impact-card-body">
+              <span class="impact-card-icon" aria-hidden="true">📱</span>
+              <h3>Digital Health Education</h3>
+              <p>Created and shared accessible health education content across digital platforms, extending GROW’s impact beyond physical outreach and making important health information more accessible to young people and communities.</p>
+            </div>
+          </article>
 
-        <article class="impact-card reveal">
-          <div class="impact-card-gradient"></div>
-          <div class="impact-card-body">
-            <span class="impact-card-icon" aria-hidden="true">📱</span>
-            <h3>Digital Health Education</h3>
-            <p>Created and shared accessible health education content across digital platforms, extending GROW’s impact beyond physical outreach and making important health information more accessible to young people and communities.</p>
-          </div>
-        </article>
+          <article class="impact-card impact-card--photo reveal">
+            <div class="impact-card-bg is-active" style="background-image:url('outreach/outreach-29.jpg')"></div>
+            <div class="impact-card-shade"></div>
+            <div class="impact-card-body">
+              <span class="impact-card-icon" aria-hidden="true">🚀</span>
+              <h3>Youth-Led Impact</h3>
+              <p>Built a growing team of 20+ passionate young people and volunteers who are contributing their skills, creativity, knowledge, and time toward improving health awareness and creating meaningful community impact.</p>
+            </div>
+          </article>
 
-        <article class="impact-card impact-card--photo reveal">
-          <div class="impact-card-bg is-active" style="background-image:url('outreach/outreach-29.jpg')"></div>
-          <div class="impact-card-shade"></div>
-          <div class="impact-card-body">
-            <span class="impact-card-icon" aria-hidden="true">🚀</span>
-            <h3>Youth-Led Impact</h3>
-            <p>Built a growing team of 20+ passionate young people and volunteers who are contributing their skills, creativity, knowledge, and time toward improving health awareness and creating meaningful community impact.</p>
-          </div>
-        </article>
-
-        <article class="impact-card reveal">
-          <div class="impact-card-gradient impact-card-gradient--alt"></div>
-          <div class="impact-card-body">
-            <span class="impact-card-icon" aria-hidden="true">🌍</span>
-            <h3>Growing Beyond One Community</h3>
-            <p>GROW began with a vision to make health education more accessible. From digital education to physical outreach, the initiative continues to expand its reach, connect with more people, and build the foundation for future community programs across Tanzania and beyond.</p>
-          </div>
-        </article>
+          <article class="impact-card reveal">
+            <div class="impact-card-gradient impact-card-gradient--alt"></div>
+            <div class="impact-card-body">
+              <span class="impact-card-icon" aria-hidden="true">🌍</span>
+              <h3>Growing Beyond One Community</h3>
+              <p>GROW began with a vision to make health education more accessible. From digital education to physical outreach, the initiative continues to expand its reach, connect with more people, and build the foundation for future community programs across Tanzania and beyond.</p>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
 
@@ -2043,6 +2046,8 @@ footer { background: #002a48; padding: 28px 5% 18px; }
       if (window.location.hash === hash) setOpen(true);
     }
   }
+  initToggleSection('impact-stats-toggle', 'impact-stats-panel');
+  initToggleSection('impact-highlights-toggle', 'impact-highlights-panel');
   initToggleSection('events-toggle', 'events-panel');
   initToggleSection('support-toggle', 'support-panel');
   initToggleSection('team-toggle', 'team-panel');
@@ -2350,17 +2355,21 @@ footer { background: #002a48; padding: 28px 5% 18px; }
 
     function formatNum(n) { return n.toLocaleString('en-US'); }
 
-    // Count-up plays once, the moment the stats grid scrolls into view —
-    // this section isn't behind a click-to-open panel like the rest of the
-    // site, so the normal scroll IntersectionObserver is enough on its own.
+    // Our Impact is now a click-to-open panel like the rest of the site
+    // (initToggleSection wires the open/close + forces .reveal visible).
+    // The count-up replays from zero every time the panel opens — not just
+    // the first time — since it's easy to open, close, and reopen.
     var statsWrap = document.querySelector('.impact-stats');
-    if (statsWrap) {
+    var impactStatsToggle = document.getElementById('impact-stats-toggle');
+    var impactStatsPanel = document.getElementById('impact-stats-panel');
+    if (statsWrap && impactStatsToggle && impactStatsPanel) {
       var nums = Array.prototype.slice.call(statsWrap.querySelectorAll('.impact-num-val'));
 
       function animateCount(el) {
         var target = parseInt(el.getAttribute('data-count'), 10);
         if (isNaN(target)) return;
         if (reducedMotion) { el.textContent = formatNum(target); return; }
+        el.textContent = '0';
         var duration = 1400, start = null;
         function step(ts) {
           if (start === null) start = ts;
@@ -2373,19 +2382,14 @@ footer { background: #002a48; padding: 28px 5% 18px; }
         window.requestAnimationFrame(step);
       }
 
-      if ('IntersectionObserver' in window) {
-        var statsObs = new IntersectionObserver(function (entries, observer) {
-          entries.forEach(function (en) {
-            if (en.isIntersecting) {
-              nums.forEach(animateCount);
-              observer.unobserve(en.target);
-            }
-          });
-        }, { threshold: 0.35 });
-        statsObs.observe(statsWrap);
-      } else {
-        nums.forEach(function (el) { el.textContent = formatNum(parseInt(el.getAttribute('data-count'), 10)); });
-      }
+      function playCountUp() { nums.forEach(animateCount); }
+
+      impactStatsToggle.addEventListener('click', function () {
+        if (impactStatsToggle.getAttribute('aria-expanded') === 'true') playCountUp();
+      });
+      // initToggleSection already opened the panel above if the page loaded
+      // on a #impact link — catch that case too so the numbers still animate.
+      if (impactStatsPanel.getAttribute('data-open') === 'true') playCountUp();
     }
 
     // A highlight card with more than one background layer cycles through
