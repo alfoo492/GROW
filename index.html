@@ -168,11 +168,17 @@ header {
 .home {
   /* Capped, not viewport-locked: a full-fold hero left a tall dead zone under
      the top-aligned content on big screens. Content taller than this just
-     grows the section. The announcement ticker used to sit above this and
-     get subtracted out of the budget here — it now lives inside the
-     Outreach section instead, so the hero just clears the fixed header. */
+     grows the section. */
   min-height: min(600px, calc(100vh - var(--header-h)));
-  display: flex; align-items: flex-start; padding: 56px 5% 32px; position: relative; overflow: hidden;
+  display: flex; align-items: flex-start; position: relative; overflow: hidden;
+  /* Top padding must clear the fixed header (--header-h) plus a little
+     breathing room, or the first item in .home-inner (the "Operating
+     since" badge) renders partly underneath it — the old announcement bar
+     used to occupy that clearance in normal document flow; now that it
+     lives in the Outreach section instead, .home has to provide its own.
+     Bottom trimmed to offset the added top space so the section doesn't
+     grow taller than it needs to. */
+  padding: calc(var(--header-h) + 24px) 5% 20px;
 }
 /* Photo + gradient are two stacked layers instead of one background
    shorthand so the Ken Burns zoom can animate the photo alone without
