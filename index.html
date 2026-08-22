@@ -624,6 +624,101 @@ footer { background: #002a48; padding: 28px 5% 18px; }
 .socials a svg { width: 15px; height: 15px; fill: rgba(255,255,255,0.6); }
 .socials a:hover { border-color: var(--accent); background: rgba(77,163,255,0.15); }
 
+/* ── IMPACT ── */
+/* Sits right after the hero and its collapsed Explore Our Work tabs. Unlike
+   every other section this one isn't behind a tab-toggle: the count-up
+   numbers are meant to play as soon as the section scrolls into view, so
+   the content needs to be in the layout (not collapsed to zero height) for
+   that to happen without an extra click first. */
+.impact-bg { background: var(--bg); }
+.impact-bg .wrap { padding-top: 28px; }
+.impact-head { text-align: center; margin: 0 auto var(--sp-group); max-width: 640px; }
+.impact-head .lede { margin: 10px auto 0; }
+
+.impact-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+.impact-stat {
+  background: var(--white); border-radius: var(--radius); padding: 26px 22px; text-align: center;
+  box-shadow: 0 1px 2px rgba(0,30,60,0.05); transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+@media (hover: hover) {
+  .impact-stat:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,58,99,0.1); }
+}
+.impact-icon { display: block; font-size: 26px; margin-bottom: 10px; }
+.impact-num { display: block; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(24px,2.6vw,32px); color: var(--navy); line-height: 1.1; }
+.impact-label { display: block; font-size: 13px; font-weight: 600; color: var(--blue-mid); margin: 6px 0 6px; }
+.impact-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+/* The three headline indicators get a bit more visual weight — bigger
+   number, a soft radial glow behind the icon — without changing the grid
+   so the row still lines up cleanly. */
+.impact-stat--big { position: relative; background: linear-gradient(180deg, var(--blue-pale) 0%, var(--white) 62%); }
+.impact-stat--big .impact-num { font-size: clamp(30px,3.4vw,42px); color: var(--blue-mid); }
+.impact-stat--big .impact-icon { font-size: 30px; }
+.impact-infinity { display: inline-block; animation: impactPulse 3.2s ease-in-out infinite; }
+@keyframes impactPulse {
+  0%, 100% { opacity: 1; text-shadow: 0 0 0 rgba(77,163,255,0); }
+  50% { opacity: 0.72; text-shadow: 0 0 22px rgba(77,163,255,0.55); }
+}
+
+/* Journey strip: a quiet horizontal pipeline on desktop, a stacked one on
+   mobile (breakpoint below). The connecting line is a single gradient bar
+   behind the icon badges rather than four separate borders. */
+.impact-journey { margin: var(--sp-group) 0; }
+.impact-journey-track { display: flex; align-items: center; justify-content: space-between; gap: 8px; position: relative; }
+.impact-journey-track::before {
+  content: ''; position: absolute; left: 27px; right: 27px; top: 27px; height: 2px;
+  background: linear-gradient(90deg, var(--blue-light), var(--accent), var(--blue-light)); z-index: 0;
+}
+.impact-journey-step { display: flex; flex-direction: column; align-items: center; gap: 10px; position: relative; z-index: 1; flex: 1; text-align: center; }
+.impact-journey-icon { width: 54px; height: 54px; border-radius: 50%; background: var(--blue-pale); border: 1px solid var(--blue-light); display: flex; align-items: center; justify-content: center; font-size: 22px; }
+.impact-journey-label { font-size: 12px; font-weight: 600; color: var(--blue-mid); letter-spacing: 0.3px; max-width: 110px; }
+.impact-journey-arrow { flex: 0 0 auto; color: var(--blue-light); position: relative; z-index: 1; background: var(--bg); }
+.impact-journey-arrow svg { width: 16px; height: 16px; display: block; }
+
+.impact-highlights { margin-top: var(--sp-group); }
+.impact-cards { display: grid; grid-template-columns: repeat(2,1fr); gap: 22px; }
+.impact-card {
+  position: relative; border-radius: var(--radius); overflow: hidden; min-height: 260px;
+  display: flex; align-items: flex-end; color: var(--white);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+@media (hover: hover) {
+  .impact-card:hover { transform: translateY(-4px); box-shadow: 0 18px 34px rgba(0,30,60,0.18); }
+}
+.impact-card-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s var(--ease), opacity 0.35s var(--ease); }
+.impact-card-bg.is-active { opacity: 1; }
+.impact-card-bg:not(.is-active) { opacity: 0; }
+@media (hover: hover) {
+  .impact-card:hover .impact-card-bg.is-active { transform: scale(1.06); }
+}
+.impact-card-gradient { position: absolute; inset: 0; background: linear-gradient(135deg, var(--blue-dark), var(--navy)); }
+.impact-card-shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,15,28,0.88) 0%, rgba(0,15,28,0.25) 55%, rgba(0,15,28,0.05) 100%); }
+.impact-card-body { position: relative; z-index: 1; padding: 22px 24px; }
+.impact-card-icon { font-size: 24px; display: block; margin-bottom: 8px; }
+.impact-card h3 { font-family: 'Fraunces', serif; font-weight: 400; font-size: 19px; margin-bottom: 6px; }
+.impact-card p { font-size: 13px; line-height: 1.65; color: rgba(255,255,255,0.82); max-width: 46ch; }
+.impact-card-dots { position: absolute; top: 16px; right: 16px; z-index: 2; display: flex; gap: 5px; }
+.impact-card-dots span { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); transition: background 0.2s, transform 0.2s; }
+.impact-card-dots span.is-active { background: var(--white); transform: scale(1.25); }
+
+.impact-close { text-align: center; margin-top: var(--sp-group); }
+.impact-close p { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(20px,2.4vw,27px); color: var(--navy); }
+.impact-close p em { font-style: italic; color: var(--blue-mid); }
+
+/* Gentle stagger so the grid/cards fill in one at a time rather than all
+   at once — each item is still its own independent .reveal, this just
+   offsets when its transition starts. */
+.impact-stats .impact-stat:nth-child(1) { transition-delay: 0.02s; }
+.impact-stats .impact-stat:nth-child(2) { transition-delay: 0.08s; }
+.impact-stats .impact-stat:nth-child(3) { transition-delay: 0.14s; }
+.impact-stats .impact-stat:nth-child(4) { transition-delay: 0.2s; }
+.impact-stats .impact-stat:nth-child(5) { transition-delay: 0.26s; }
+.impact-stats .impact-stat:nth-child(6) { transition-delay: 0.32s; }
+.impact-stats .impact-stat:nth-child(7) { transition-delay: 0.38s; }
+.impact-cards .impact-card:nth-child(1) { transition-delay: 0.02s; }
+.impact-cards .impact-card:nth-child(2) { transition-delay: 0.1s; }
+.impact-cards .impact-card:nth-child(3) { transition-delay: 0.18s; }
+.impact-cards .impact-card:nth-child(4) { transition-delay: 0.26s; }
+
 /* ── REVEAL ON SCROLL ── */
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -645,6 +740,8 @@ footer { background: #002a48; padding: 28px 5% 18px; }
   .ncd-list { grid-template-columns: 1fr; }
   .why-strip { grid-template-columns: 1fr; }
   .support-card { flex: 1 1 100%; }
+  .impact-stats { grid-template-columns: 1fr 1fr; }
+  .impact-cards { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   /* One step down the whole scale — every section, gap and margin follows. */
@@ -678,6 +775,12 @@ footer { background: #002a48; padding: 28px 5% 18px; }
   .outreach-lightbox-nav { width: 42px; height: 42px; }
   .outreach-lightbox-prev { left: 8px; }
   .outreach-lightbox-next { right: 8px; }
+  .impact-stats { grid-template-columns: 1fr; }
+  .impact-journey-track { flex-direction: column; align-items: stretch; gap: 22px; }
+  .impact-journey-track::before { left: 27px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; background: linear-gradient(180deg, var(--blue-light), var(--accent), var(--blue-light)); }
+  .impact-journey-step { flex-direction: row; text-align: left; justify-content: flex-start; }
+  .impact-journey-label { max-width: none; }
+  .impact-journey-arrow { align-self: center; transform: rotate(90deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -789,6 +892,152 @@ footer { background: #002a48; padding: 28px 5% 18px; }
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ IMPACT ════ -->
+<section class="impact-bg" id="impact" aria-labelledby="impact-title">
+  <div class="wrap">
+    <div class="impact-head reveal">
+      <span class="label">Our Impact</span>
+      <h2 class="serif" id="impact-title">Our Impact <em>So Far</em></h2>
+      <p class="lede">Every conversation, every student, and every community brings us one step closer to a healthier future.</p>
+    </div>
+
+    <div class="impact-stats">
+      <div class="impact-stat impact-stat--big reveal">
+        <span class="impact-icon" aria-hidden="true">👥</span>
+        <span class="impact-num"><span class="impact-num-val" data-count="1000">0</span><span class="impact-num-suf">+</span></span>
+        <span class="impact-label">People Reached</span>
+        <p class="impact-desc">People reached through physical outreach, digital campaigns, and health education.</p>
+      </div>
+
+      <div class="impact-stat reveal">
+        <span class="impact-icon" aria-hidden="true">🎓</span>
+        <span class="impact-num"><span class="impact-num-val" data-count="350">0</span><span class="impact-num-suf">+</span></span>
+        <span class="impact-label">Students Engaged</span>
+        <p class="impact-desc">Students reached through school outreach and education programs.</p>
+      </div>
+
+      <div class="impact-stat reveal">
+        <span class="impact-icon" aria-hidden="true">🏫</span>
+        <span class="impact-num"><span class="impact-num-val" data-count="1">0</span></span>
+        <span class="impact-label">Community &amp; School Reached</span>
+        <p class="impact-desc">Schools, communities, or institutions where GROW has successfully conducted activities.</p>
+      </div>
+
+      <div class="impact-stat impact-stat--big reveal">
+        <span class="impact-icon" aria-hidden="true">❤️</span>
+        <span class="impact-num"><span class="impact-infinity" aria-label="Infinite">∞</span></span>
+        <span class="impact-label">Lives Impacted</span>
+        <p class="impact-desc">Creating a ripple effect of health awareness, knowledge, and positive change that continues beyond every outreach.</p>
+      </div>
+
+      <div class="impact-stat impact-stat--big reveal">
+        <span class="impact-icon" aria-hidden="true">📢</span>
+        <span class="impact-num"><span class="impact-num-val" data-count="25000">0</span><span class="impact-num-suf">+</span></span>
+        <span class="impact-label">Digital Reach</span>
+        <p class="impact-desc">People reached through social media, digital health campaigns, videos, and online education.</p>
+      </div>
+
+      <div class="impact-stat reveal">
+        <span class="impact-icon" aria-hidden="true">📚</span>
+        <span class="impact-num"><span class="impact-num-val" data-count="2">0</span></span>
+        <span class="impact-label">Health Education Sessions</span>
+        <p class="impact-desc">Educational sessions, presentations, workshops, or awareness activities successfully conducted.</p>
+      </div>
+
+      <div class="impact-stat reveal">
+        <span class="impact-icon" aria-hidden="true">🤝</span>
+        <span class="impact-num"><span class="impact-num-val" data-count="20">0</span><span class="impact-num-suf">+</span></span>
+        <span class="impact-label">Volunteers &amp; Team Members</span>
+        <p class="impact-desc">Young people and volunteers contributing their time, skills, and passion to GROW’s mission.</p>
+      </div>
+    </div>
+
+    <div class="impact-journey reveal">
+      <ol class="impact-journey-track">
+        <li class="impact-journey-step">
+          <span class="impact-journey-icon" aria-hidden="true">💻</span>
+          <span class="impact-journey-label">Digital Education</span>
+        </li>
+        <li class="impact-journey-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+        </li>
+        <li class="impact-journey-step">
+          <span class="impact-journey-icon" aria-hidden="true">🏫</span>
+          <span class="impact-journey-label">School Outreach</span>
+        </li>
+        <li class="impact-journey-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+        </li>
+        <li class="impact-journey-step">
+          <span class="impact-journey-icon" aria-hidden="true">🩺</span>
+          <span class="impact-journey-label">Health Awareness</span>
+        </li>
+        <li class="impact-journey-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+        </li>
+        <li class="impact-journey-step">
+          <span class="impact-journey-icon" aria-hidden="true">🌱</span>
+          <span class="impact-journey-label">Empowered Communities</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="impact-highlights">
+      <div class="impact-head reveal">
+        <h3 class="serif" style="font-size:clamp(22px,2.4vw,29px);">Impact <em>Highlights</em></h3>
+        <p class="lede">Behind every number is a conversation, a question, a student, and a community taking a step toward a healthier future.</p>
+      </div>
+
+      <div class="impact-cards">
+        <article class="impact-card impact-card--photo reveal" data-cycle="true">
+          <div class="impact-card-bg is-active" style="background-image:url('outreach/outreach-01.jpg')"></div>
+          <div class="impact-card-bg" style="background-image:url('outreach/outreach-10.jpg')"></div>
+          <div class="impact-card-bg" style="background-image:url('outreach/outreach-21.jpg')"></div>
+          <div class="impact-card-shade"></div>
+          <div class="impact-card-dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
+          <div class="impact-card-body">
+            <span class="impact-card-icon" aria-hidden="true">🏫</span>
+            <h3>Jangwani Secondary School Outreach</h3>
+            <p>Successfully conducted an NCD education outreach at Jangwani Secondary School, engaging students in meaningful conversations about non-communicable diseases, prevention, healthy lifestyles, and early awareness.</p>
+          </div>
+        </article>
+
+        <article class="impact-card reveal">
+          <div class="impact-card-gradient"></div>
+          <div class="impact-card-body">
+            <span class="impact-card-icon" aria-hidden="true">📱</span>
+            <h3>Digital Health Education</h3>
+            <p>Created and shared accessible health education content across digital platforms, extending GROW’s impact beyond physical outreach and making important health information more accessible to young people and communities.</p>
+          </div>
+        </article>
+
+        <article class="impact-card impact-card--photo reveal">
+          <div class="impact-card-bg is-active" style="background-image:url('outreach/outreach-29.jpg')"></div>
+          <div class="impact-card-shade"></div>
+          <div class="impact-card-body">
+            <span class="impact-card-icon" aria-hidden="true">🚀</span>
+            <h3>Youth-Led Impact</h3>
+            <p>Built a growing team of 20+ passionate young people and volunteers who are contributing their skills, creativity, knowledge, and time toward improving health awareness and creating meaningful community impact.</p>
+          </div>
+        </article>
+
+        <article class="impact-card reveal">
+          <div class="impact-card-gradient impact-card-gradient--alt"></div>
+          <div class="impact-card-body">
+            <span class="impact-card-icon" aria-hidden="true">🌍</span>
+            <h3>Growing Beyond One Community</h3>
+            <p>GROW began with a vision to make health education more accessible. From digital education to physical outreach, the initiative continues to expand its reach, connect with more people, and build the foundation for future community programs across Tanzania and beyond.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="impact-close reveal">
+      <p>Our journey is <em>just beginning.</em></p>
     </div>
   </div>
 </section>
@@ -2092,6 +2341,73 @@ footer { background: #002a48; padding: 28px 5% 18px; }
       if (e.key === 'Escape') closeLightbox();
       else if (e.key === 'ArrowRight') openLightbox((lbIndex + 1) % totalPhotos);
       else if (e.key === 'ArrowLeft') openLightbox((lbIndex - 1 + totalPhotos) % totalPhotos);
+    });
+  })();
+
+  // ── IMPACT: count-up stats + highlight-card image cycling ──
+  (function () {
+    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function formatNum(n) { return n.toLocaleString('en-US'); }
+
+    // Count-up plays once, the moment the stats grid scrolls into view —
+    // this section isn't behind a click-to-open panel like the rest of the
+    // site, so the normal scroll IntersectionObserver is enough on its own.
+    var statsWrap = document.querySelector('.impact-stats');
+    if (statsWrap) {
+      var nums = Array.prototype.slice.call(statsWrap.querySelectorAll('.impact-num-val'));
+
+      function animateCount(el) {
+        var target = parseInt(el.getAttribute('data-count'), 10);
+        if (isNaN(target)) return;
+        if (reducedMotion) { el.textContent = formatNum(target); return; }
+        var duration = 1400, start = null;
+        function step(ts) {
+          if (start === null) start = ts;
+          var progress = Math.min((ts - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = formatNum(Math.floor(eased * target));
+          if (progress < 1) window.requestAnimationFrame(step);
+          else el.textContent = formatNum(target);
+        }
+        window.requestAnimationFrame(step);
+      }
+
+      if ('IntersectionObserver' in window) {
+        var statsObs = new IntersectionObserver(function (entries, observer) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              nums.forEach(animateCount);
+              observer.unobserve(en.target);
+            }
+          });
+        }, { threshold: 0.35 });
+        statsObs.observe(statsWrap);
+      } else {
+        nums.forEach(function (el) { el.textContent = formatNum(parseInt(el.getAttribute('data-count'), 10)); });
+      }
+    }
+
+    // A highlight card with more than one background layer cycles through
+    // them on hover (desktop) and on click (works for touch too, and
+    // doubles as the "click to reveal more" interaction for Jangwani).
+    Array.prototype.slice.call(document.querySelectorAll('.impact-card[data-cycle="true"]')).forEach(function (card) {
+      var bgs = Array.prototype.slice.call(card.querySelectorAll('.impact-card-bg'));
+      var dots = Array.prototype.slice.call(card.querySelectorAll('.impact-card-dots span'));
+      if (bgs.length < 2) return;
+      var idx = 0, timer = null;
+      function show(next) {
+        idx = (next + bgs.length) % bgs.length;
+        bgs.forEach(function (b, j) { b.classList.toggle('is-active', j === idx); });
+        dots.forEach(function (d, j) { d.classList.toggle('is-active', j === idx); });
+      }
+      card.addEventListener('click', function () { show(idx + 1); });
+      if (!reducedMotion) {
+        card.addEventListener('mouseenter', function () {
+          timer = window.setInterval(function () { show(idx + 1); }, 2200);
+        });
+        card.addEventListener('mouseleave', function () { window.clearInterval(timer); });
+      }
     });
   })();
 })();
